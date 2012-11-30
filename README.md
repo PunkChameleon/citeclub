@@ -1,4 +1,4 @@
 citeclub
 ========
 
-Cite the power.
+Cite the power. In progress.
