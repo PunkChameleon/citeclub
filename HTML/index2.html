@@ -7,19 +7,20 @@
 	<body>
 
 		<script type="text/javascript" src="./js/vendor/jquery-1.8.2.min.js"></script>
+		<script type="text/javascript" src="./js/PageDataArray.js"></script>
 		<script type="text/javascript" src="./js/citeclub.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 			
-				var searchingMsg = "Searching for a page that needs your help...";
-				$('#searching').html(searchingMsg);
+				var SEARCHING_MSG = "Searching for a page that needs your help...";
+				$('#searching').html(SEARCHING_MSG);
 			
 				// hide iframe
 				$('iframe#wikiPage, #recent').css('display','none');
 				
 				// add event handler to link
 				$('#newPage').click(function() {
-					$('#searching').html(searchingMsg);
+					$('#searching').html(SEARCHING_MSG);
 					var keywords = $.trim($('#keywords').val());
 					newPage(keywords);
 				});
@@ -44,22 +45,35 @@
 				$('#newPage').prop('disabled', true);
 			
 				citationNeededPage(keywords, function(pageData) {
-					var id = pageData.id;
-					var title = pageData.title;
-					// show 'page found'
-					$('#searching').html('Page found!');
-					// display iframe and recent 
-					$('iframe#wikiPage, #recent').css('display','inline');
-					// set iframe to page URL
-					$('iframe#wikiPage').attr('src', urlFromPageId(id));
-					// add page to dropdown
-					$('select#recentPages')
-						.append(
-							$("<option></option>") // add new option
-								.attr('value', id) // whose value is the id
-								.text(title)	   // text is the title
-						)
-						.children('option:last').prop('selected', true); // select newly added option
+					if (pageData != null) {
+						// data found
+						
+						// get page id and title
+						var id = pageData.id;
+						var title = pageData.title;
+						
+						// show 'page found'
+						$('#searching').html('Page found!');
+						
+						// display iframe and recent 
+						$('iframe#wikiPage, #recent').css('display','inline');
+						
+						// set iframe to page URL
+						$('iframe#wikiPage').attr('src', urlFromPageId(id));
+						
+						// add page to dropdown
+						$('select#recentPages')
+							.append(
+								$("<option></option>") // add new option
+									.attr('value', id) // whose value is the id
+									.text(title)	   // text is the title
+							)
+							.children('option:last').prop('selected', true); // select newly added option
+							
+					} else {
+						// couldn't find any pages
+						$('#searching').html("No pages found. Try changing search criteria.");
+					}
 					// enable button
 					$('#newPage').prop('disabled', false);
 				});
@@ -77,7 +91,7 @@
 			Recent Articles: <select id="recentPages"></select>
 		</p>
 		<br/>
-		<iframe name="wikiPage" id="wikiPage" width="768" height="1000"></iframe>
+		<iframe name="wikiPage" id="wikiPage" width="768" height="500"></iframe>
 		
 	</body>
 </html>
