@@ -1,16 +1,236 @@
 /* Begin LESS */
 
+/* Import the fun things */
+@import url(http://fonts.googleapis.com/css?family=Antic+Slab);
+
+/* Reset the 'mofo */
+html, body, ul, ol, li, form, fieldset, legend{ margin: 0; padding: 0;}
+h1, h2, h3, h4, h5, h6, p { margin-top: 0; font-weight:normal; }
+fieldset,img { border: 0; }
+legend { color: #000; }
+li { list-style: none; }
+sup { vertical-align: text-top; }
+sub { vertical-align: text-bottom; }
+table { border-collapse: collapse; border-spacing: 0;}
+caption, th, td { text-align: left; vertical-align: top; font-weight: normal;}
+input, textarea, select { line-height: 1.1; }
+abbr, acronym { border-bottom: .1em dotted; cursor: help; }
+
+/* Make a Nice, Small Library */
+
+.clear { clear:both; }
+.fleft { float:left; }
+.fright { float:right; }
+
+/* Define da Variables */
+
+@primary: #8cbfe3;
+
+/* Mix 'em in... Shaken, not stirred, you know. /*/
+
+.border-radius (@radius: 10px) {
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	border-radius: @radius;
+}
+
+.transition (@variables) {
+	-webkit-transition: @variables;
+	-moz-transition: @variables;
+	-o-transition:@variables;
+	transition:@variables;
+}
+
+.box-shadow (@x: 0px, @y: 3px, @blur: 5px, @alpha: 0.5) {
+	-webkit-box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+	-moz-box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+	box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+}
+
+.scale_transform (@variables) {
+	-webkit-transform: scale(@variables);
+	-moz-transform: scale(@variables);
+	-o-transform: scale(@variables);
+	transform: scale(@variables);
+}
+
+
 /* Basics */
+body {
+	background-color: rgba(140, 191, 227, 0.19);
+	#wrapper {
+		width:100%;
+		height:100%;
+		position:relative;
+		font-family: 'Antic Slab', serif;
+		padding:0;
+		margin:0;
 
-#wrapper {
+		#main_container {
+			width:960px;
+			margin:0 auto;
+			height:100%;
+		}
+	}
+}
+
+
+header {
 	width:100%;
-	height:100%;
-	position:relative;
-	background-color: rgba(140, 191, 227, 0.5);
+	height:50px;
+	
+	#logo {
+		text-align:center;
+		width:36%;
+		margin:0;
+		float:left;
+		
+		h1 {
+			color:@primary;
+			font-size:63px;
+			font-weight:normal;
+			margin:0;
+			
+			span {
+				color:black;
+			}
+		}
+		
+		h2 {
+			color:black;
+			font-style:italic;
+			font-size:20px;
+			line-height:22px;
+			text-align:center;
+			display:none;
+		}
+		
+	}
+	
+	nav {
+		font-weight:bold;
+		
+		ul {
+			padding:35px 20px;
+			width:54%;
+			float:right;
+		
+			li {
+				display:inline-block;
+				margin:0 30px;
+				
+				a {
+					color:black;
+					text-decoration:none;
+				}
+				
+				a:hover {
+					text-decoration:underline;
+				}
+			}
+		}
+	}
+
 }
 
-#main_container {
-	width:960px;
-	margin:0 auto;
-	background:red;
+#content {
+
+	width:100%;
+	padding: 50px 0;
+	text-align:center;
+	
+	h2 {
+		color:black;
+		font-weight:bold;
+		font-size:22px;
+		line-height:24px;
+	}
+
+	form {
+		.button {
+			margin: 50px auto;
+			cursor: pointer;
+			outline: none;
+			background-color: @primary;
+			font-style:italic;
+			font-weight:normal;
+			color: white;
+			font-size:26px;
+			line-height:18px;
+			width: 53%;
+			height:45px;
+			border:1px solid black;
+			.border-radius(20px);
+		}
+
+		.button:hover {
+			color: white;
+			.transition(all 0.4s ease-in-out);
+			.scale_transform(1.1);
+		}
+	
+	}
+
 }
+
+
+/* Styles for the iframe holder */
+
+header.fixed {
+	height:100%;
+	
+	#logo {
+		width:29%;
+		
+		h1 {
+			font-size:50px;
+		}	
+	}
+	
+	nav {
+		ul {
+			padding:25px 20px 0;
+			width:52%;
+			float:left;
+			font-size:14px;
+			padding-right:0;
+		
+			li {
+				display:inline-block;
+				margin:0 30px;
+			}
+			
+			li:last-child {
+				margin-right:0;
+			}
+		}
+	
+	}
+	
+	form {
+		.button {
+			margin: 23px 0 22px;
+			cursor: pointer;
+			outline: none;
+			background-color: @primary;
+			font-style:italic;
+			font-weight:normal;
+			color: white;
+			line-height:18px;
+			border:1px solid black;
+			.border-radius(20px);
+		}
+
+		.button:hover {
+			.transition(all 0.4s ease-in-out);
+			.scale_transform(1.1);
+		}
+	}
+
+}
+
+iframe {
+	border-top: 2px solid @primary !important;
+}
+
+
