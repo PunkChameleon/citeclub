@@ -58,6 +58,7 @@ abbr, acronym { border-bottom: .1em dotted; cursor: help; }
 /* Basics */
 body {
 	background-color: rgba(140, 191, 227, 0.19);
+	
 	#wrapper {
 		width:100%;
 		height:100%;
@@ -84,6 +85,7 @@ header {
 		width:36%;
 		margin:0;
 		float:left;
+		cursor:pointer;
 		
 		h1 {
 			color:@primary;
@@ -208,6 +210,20 @@ header.fixed {
 	}
 	
 	form {
+		float:right;
+		
+		.filter {
+			.border-radius(20px);
+			width:400px;
+			padding:3px 10px;
+			font-style: italic;
+			height:19px;
+		}
+		
+		label {
+			font-style:italic;
+			margin: 0 5px;
+		}
 		.button {
 			margin: 23px 0 22px;
 			cursor: pointer;
@@ -231,6 +247,8 @@ header.fixed {
 
 iframe {
 	border-top: 2px solid @primary !important;
+	min-height:900px;
+	height:100%;
 }
 
 

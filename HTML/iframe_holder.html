@@ -13,6 +13,9 @@
         <link rel="stylesheet" href="css/main.css">
 		<link rel="stylesheet/less" type="text/css" href="css/style.less">
 		<script src="js/vendor/less.js" type="text/javascript"></script>
+		<script>
+			less.watch();
+		</script>
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 
     </head>
@@ -25,20 +28,15 @@
         <div id="wrapper"><!-- Begin Wrapper -->
 			<div id="main_container">
 				<header class="fixed">
-					<article id="logo">
+					<a href="index.html"><article id="logo">
 						<h1>*[cite] <span>club</span></h1>
 						<h2>cite the power</h2>
-					</article>
-					<nav>
-						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li><a href="#">About</a></li>
-							<li><a href="#">Contribute</a></li>
-							<li><a href="#">Contact</a></li>
-						</ul>
-					</nav>
+					</article></a>
 					<form>
-						<input type="submit" class="button" value="* cite something now">
+						<input type="text" class="filter" value"" placeholder="Search for Something to Cite Specifically...">
+						<input type="submit" class="button" value="Look">
+						<label>Or...</label>
+						<input type="submit" class="button" value="Roll the Dice">
 					</form>
 				</header>
 			</div>
