@@ -17,6 +17,7 @@
 			less.watch();
 		</script>
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+		
 
     </head>
     <body>
@@ -33,22 +34,107 @@
 						<h2>cite the power</h2>
 					</article></a>
 					<form>
-						<input type="text" class="filter" value"" placeholder="Search for Something to Cite Specifically...">
-						<input type="submit" class="button" value="Look">
+						<input type="text"  id="keywords" class="filter" value"" placeholder="Search for Something to Cite Specifically...">
+						<input type="submit" class="button" id="newPage" value="Look">
 						<label>Or...</label>
-						<input type="submit" class="button" value="Roll the Dice">
+						<input type="submit" class="button" id="dice" value="Roll the Dice">
 					</form>
+					<article id="loader">
+						<img src="img/ajax-loader.gif">
+					</article>
 				</header>
 			</div>
-			<iframe src="http://en.wikipedia.org/wiki/Richard_Stallman" style="border: 0; width: 100%; height: 100%;">Your browser doesn't support iFrames.</iframe>
+			<iframe id="wikiPage" name="wikiPage" style="border: 0; width: 100%; height: 100%;">Your browser doesn't support iFrames.</iframe>
 		</div><!-- End Wrapper -->
 
 		
 		<!-- End Site / Application -->
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>-->
+		<script src="js/vendor/jquery-1.8.2.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
+		<script src="js/PageDataArray.js"></script>
+		<script src="js/citeclub.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+			
+				//var SEARCHING_MSG = "Searching for a page that needs your help...";
+				//$('#searching').html(SEARCHING_MSG);
+			
+				// hide iframe
+				$('iframe#wikiPage, #recent').css('display','none');
+				
+				// add event handler to filter link
+				$('#newPage').click(function() {
+					$('#loader').show();
+					var keywords = $.trim($('#keywords').val());
+					newPage(keywords);
+				});
+				
+				// add event handler to dice link
+				$('#dice').click(function() {
+					$('#loader').show();
+					//var keywords = $.trim($('#keywords').val());
+					newPage();
+				});
+				
+				// load page when selected
+				$('#recentPages').change(function() {
+					var selectedPageId = $('select#recentPages').val();
+					$('iframe#wikiPage').attr('src', urlFromPageId(selectedPageId));
+				});
+				
+				// get new page automatically
+				newPage();
+			});
+			
+			function newPage(keywords) {
+			
+				/*
+				* Gets new page URL, displays iframe (in case it's hidden), and sets iframe src to it
+				*/
+				
+				// disable button while searching
+				//$('#newPage').prop('disabled', true);
+			
+				citationNeededPage(keywords, function(pageData) {
+					if (pageData != null) {
+						// data found
+						
+						// get page id and title
+						var id = pageData.id;
+						var title = pageData.title;
+						
+						
+						
+						// display iframe and recent 
+						$('iframe#wikiPage, #recent').css('display','inline');
+						
+						// set iframe to page URL
+						$('iframe#wikiPage').attr('src', urlFromPageId(id));
+						
+						// add page to dropdown
+					/*	$('select#recentPages')
+							.append(
+								$("<option></option>") // add new option
+									.attr('value', id) // whose value is the id
+									.text(title)	   // text is the title
+							)
+							.children('option:last').prop('selected', true); // select newly added option
+					*/		
+						// show 'page found'
+						$('#loader').hide();
+					} else {
+						// couldn't find any pages
+						alert("No pages found. Try changing search criteria.");
+					}
+					// enable button
+					//$('#newPage').prop('disabled', false);
+				});
+			}
+		</script>
+		
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
