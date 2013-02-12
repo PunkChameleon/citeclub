@@ -41,7 +41,7 @@ class Wiki {
         return $xmlStr;
 	}
 	
-	static public function edit($pageId, $text) {
+	static public function edit($pageId, $text, $sectionNum) {
 		
 		/*
 		* Edit a page
@@ -51,8 +51,9 @@ class Wiki {
 		
 		$url = static::$wikiURL . "/w/api.php?action=edit&format=xml";
 		$params = array(
+							'section'=>$sectionNum,
 	              			'summary'=>'Testing',
-	              			'text'=>$text,
+	              			'text'=>utf8_encode($text),
 	              			'pageid'=>$pageId,
 	              			'token'=>$token
               			);

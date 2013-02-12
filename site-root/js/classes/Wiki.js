@@ -1,6 +1,10 @@
 
 
-function WikiData(wikiURL) { 
+function Wiki(wikiURL) { 
+	
+	/*
+	* Query Wiki via API
+	*/
 
 	var wikiURL = wikiURL;
 	var apiURL = wikiURL + "/w/api.php";
