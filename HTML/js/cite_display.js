@@ -1,13 +1,26 @@
 $(document).ready(function() {
 
-	function formShowSwitcher(param) {
-		$('#forms #' + param).show();
+	$('#citeIt').click(function() {
+		$('#cite_or_skip').hide();
+		$('#cite_buttons').show();
+	});
+
+	function showCorrectForm(param) {
+			$('#' + param).click(function() {
+			//alert('hey')
+			$('#cite_buttons').hide();
+			//alert('hey')
+			$('#forms').hide();
+			//alert('hey')
+			$('#forms form#'+ param).show();
+			//alert('he')
+		});
 	}
 
-	formShowSwitcher();
+	showCorrectForm('web');
+	showCorrectForm('news');
+	showCorrectForm('book');
+	showCorrectForm('journal');
 
-	$('#forms #chooser').change(function() {)
-		formShowSwitcher($(this).val())
-	});
 
 });

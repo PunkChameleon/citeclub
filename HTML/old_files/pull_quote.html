@@ -23,11 +23,13 @@
         <!-- Add your site or application content here -->
         <div id="wrapper"><!-- Begin Wrapper -->
 			<div id="main_container">
-				<header class="fixed">
-					<a href="index.html"><article id="logo">
-						<h1>*[cite] <span>club</span></h1>
-						<h2>cite the power</h2>
-					</article></a>
+				<header>
+					<a href="index.html">
+						<article id="logo">
+							<h1>*[cite] <span>club</span></h1>
+							<h2>cite the power</h2>
+						</article>
+					</a>
 					<form>
 						<input type="text"  id="keywords" class="filter" value"" placeholder="Search for Something to Cite Specifically...">
 						<input type="submit" class="button" id="newPage" value="Look">
@@ -43,19 +45,20 @@
 						<article id="quote"><p>"One of his criteria for giving an interview to a journalist is that the journalist agree to use his terminology throughout the article.[65] <span>Sometimes he has even required journalists to read parts of the GNU philosophy before an interview, for "efficiency's sake".<sup>[citation needed]</sup></span>He has been known to turn down speaking requests over some terminology issues.[66]</p></article>
 				</section>
 				<section id="play_area"><!-- Start Play Area -->
-					<form>
+					<article id="cite_or_skip">
 						<input type="submit" class="button" id="citeIt" value="cite it!">
 						<label>or</label>
 						<input type="submit" class="button" id="skipIt" value="skip it!">
-					</form>
+					</article>
+					<article id="cite_buttons" style="display: none;">
+						<label>What type of source are you using?</label><br>
+						<input type="submit" class="button" id="web" value="Web">
+						<input type="submit" class="button" id="news" value="News">
+						<input type="submit" class="button" id="book" value="Book">
+						<input type="submit" class="button" id="journal" value="Journal">
+					</article>
 				</section><!-- End Play Area -->
 				<section id="forms">
-					<select id="chooser">
-						<option id="web">Web</option>
-						<option id="news">News</option>
-						<option id="book">Book</option>
-						<option id="journal">Journal</option>
-					</select>
 					<form id="web">
 						<label>Last Name</label>
 						<input id="last_name" type="text">
@@ -77,7 +80,6 @@
 						<input id="reference_group" type="text">
 						<br>
 						<input type="button" value="Submit">
-
 					</form>
 					<form id="news">
 						<label>Last Name</label>
