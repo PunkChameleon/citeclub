@@ -22,7 +22,7 @@ try {
 	}
 	
 	// redirect
-	header('Location:  /index.php' . $redirectParam);
+	header('Location:  /' . $redirectParam);
 	exit();
 	
 } catch (Exception $e) {

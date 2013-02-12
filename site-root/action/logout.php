@@ -9,7 +9,7 @@ try {
 	session_destroy();
 	
 	// redirect
-	header('Location:  /index.php');
+	header('Location:  /');
 	exit();
 	
 } catch (Exception $e) {
