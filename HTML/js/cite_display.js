@@ -14,7 +14,6 @@ $(document).ready(function() {
 				$('#forms').hide()
 			}
 			//alert('hey')
-			$('')
 			$('#forms form#'+ param).show();
 			//alert('he')
 		});
