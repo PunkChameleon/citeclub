@@ -6,12 +6,15 @@ $(document).ready(function() {
 	});
 
 	function showCorrectForm(param) {
-			$('#' + param).click(function() {
+			$('#cite_buttons #' + param).click(function() {
 			//alert('hey')
 			$('#cite_buttons').hide();
 			//alert('hey')
-			$('#forms').hide();
+			if ($('#forms form').is(':visible')) {
+				$('#forms').hide()
+			}
 			//alert('hey')
+			$('')
 			$('#forms form#'+ param).show();
 			//alert('he')
 		});
