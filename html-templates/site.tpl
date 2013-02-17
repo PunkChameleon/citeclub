@@ -33,8 +33,5 @@
 		<script src="/js/classes/WikitextProcessor.js"></script>
 		<script src="/js/main.js"></script>
         <script src="js/plugins.js"></script>
-		<script src="js/PageDataArray.js"></script>
-		<script src="js/citeclub.js"></script>
-		<script src="js/cite_display.js"></script>
     </body>
 </html>

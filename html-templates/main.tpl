@@ -31,21 +31,7 @@
 	
 	<blockquote></blockquote>
 
-	{if $lgusername }
-		<form method="POST" id="edit" action="/action/edit.php">
-			<input type="hidden" id="section" name="section" />
-			<input type="hidden" id="pageId" name="pageId" />
-			<textarea id="text" name="text" rows="20" cols="100"></textarea><br/>
-			<input type="submit" id="editBtn" value="Edit" />
-		</form> 
-	{else}
-		Please <a href="#" id="showLogin">log in</a> or <a href="{$wikiURL}/w/index.php?title=Special:UserLogin&returnto=Main+Page&type=signup">create an account</a> to start citing! 
-		<form method="POST" id="login" action="/action/login.php">
-			Username: <input type="text" id="username" name="username" /><br/>
-			Password: <input type="password" id="password" name="password" /><br/>
-		<input type="submit" value="Go" />
-	</form>
-	{/if}
+	
 
 -->
 
@@ -59,10 +45,25 @@
 						</article>
 					</a>
 					<form>
-						<input type="text"  id="keywords" class="filter" value"" placeholder="Search for Something to Cite Specifically...">
-						<input type="submit" class="button" id="newPage" value="Look">
-						<label>Or...</label>
-						<input type="submit" class="button" id="dice" value="Roll the Dice">
+						{if $lgusername }
+							<form method="POST" id="edit" action="/action/edit.php">
+								<input type="hidden" id="section" name="section" />
+								<input type="hidden" id="pageId" name="pageId" />
+								<textarea id="text" name="text" rows="20" cols="100"></textarea><br/>
+								<input type="submit" id="editBtn" value="Edit" />
+							</form>
+							<input type="text"  id="keywords" class="filter" value"" placeholder="Search for Something to Cite Specifically...">
+							<input type="submit" class="button" id="newPage" value="Look">
+							<label>Or...</label>
+							<input type="submit" class="button" id="dice" value="Roll the Dice">
+						{else}
+							Please <a href="#" id="showLogin">log in</a> or <a href="{$wikiURL}/w/index.php?title=Special:UserLogin&returnto=Main+Page&type=signup">create an account</a> to start citing! 
+							<!--<form method="POST" id="login" action="/action/login.php">
+								Username: <input type="text" id="username" name="username" /><br/>
+								Password: <input type="password" id="password" name="password" /><br/>
+							<input type="submit" value="Go" />-->
+						</form>
+						{/if}
 					</form>
 					<article id="loader">
 						<img src="img/ajax-loader.gif">
