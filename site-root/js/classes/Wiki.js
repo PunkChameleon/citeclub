@@ -21,7 +21,7 @@ function Wiki(wikiURL) {
 		* Get citation needed Wikipedia page data
 		*/
 		
-		if (keywords.length > 0) {
+		if (keywords !== undefined && keywords.length > 0) {
 			// some keywords were passed
 			citationNeededPagesByKeyword(keywords, function(result){
 				pageFound(result[0]);

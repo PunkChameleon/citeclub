@@ -100,6 +100,7 @@ abstract class RequestHandler
 			}
 
 			case 'html':
+				header('Content-Type: text/html; charset=utf-8');
 				$responseData['responseID'] = $responseID;
 				return TemplateResponse::respond($responseID, $responseData);
 

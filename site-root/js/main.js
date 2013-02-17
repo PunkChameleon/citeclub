@@ -4,6 +4,22 @@ $(document).ready(function() {
 	$('form#edit').hide();
 	$('form#login').hide();
 
+
+	function showCorrectForm(param) {
+			$('#cite_buttons #' + param).click(function() {
+			$('#cite_buttons').hide();
+			if ($('#forms form').is(':visible')) {
+				$('#forms').hide()
+			}
+			$('#forms form#'+ param).show();
+		});
+	}
+
+	showCorrectForm('web');
+	showCorrectForm('news');
+	showCorrectForm('book');
+	showCorrectForm('journal');
+
 	$.get('/ajax/getWikiURL.php', function(wikiURL) {
 
 		var wiki = new Wiki(wikiURL);
@@ -11,13 +27,30 @@ $(document).ready(function() {
 		$('#searching').html("Searching for a page that needs your help...");
 	
 		// add event handler to link
+		$('#citeIt').click(function() {
+			$('#cite_or_skip').hide();
+			$('#cite_buttons').show();
+			
+		});
+		
+		//Set up Skipping Event
+		$('#skipIt').click(function() {
+			newPage(wiki);
+		});
+		
+		//Set up "Look" Event
 		$('#newPage').click(function() {
 			var keywords = $.trim($('#keywords').val());
 			newPage(wiki, keywords);
 		});
+		
+		//Set up Random "Roll the Dice" event
+		$('#dice').click(function() {
+			newPage(wiki);
+		});
 	
 		// get new page automatically
-		$('#newPage').click();
+		$('#skipIt').click();
 		
 		$('#showLogin').click(function() {
 			$('form#login').show();
@@ -73,14 +106,14 @@ function newPage(wiki, keywords) {
 					$('form#edit #text').html(sectionText);
 					
 					// set article title & link
-					$('#explanation').html('Citation needed for <a href="' + wiki.urlFromPageId(id) + '">' + title + '</a>:');
+					$('#article_link').html('<a href="' + wiki.urlFromPageId(id) + '">' + title + '</a>');
 					
 					// set paragraph 
 					var paragraphHTML = $(html).find(":contains('citation needed')").parent().html();
-					$('blockquote').html(paragraphHTML);
+					$('#quote').html(paragraphHTML);
 					
 					// show article info & edit form
-					$('#explanation, blockquote, form#edit').show();
+					$('#explanation, #quote, form#edit').show();
 					
 					// enable button
 					$('#newPage').prop('disabled', false);

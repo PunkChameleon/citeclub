@@ -41,7 +41,7 @@ class Wiki {
         return $xmlStr;
 	}
 	
-	static public function edit($pageId, $text, $sectionNum) {
+	static public function edit($pageId, $text, $sectionNum, $captchaId, $captchaWord) {
 		
 		/*
 		* Edit a page
@@ -57,6 +57,8 @@ class Wiki {
 	              			'pageid'=>$pageId,
 	              			'token'=>$token
               			);
+        //if (empty($captchaId)) { array_push('captchaid'=>$captchaId); }
+		//if (empty($captchaWord)) { array_push('captchaword'=>$captchaWord); }
 		
 		$xmlStr = static::httpRequest($url, http_build_query($params));
 		

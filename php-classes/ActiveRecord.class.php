@@ -472,9 +472,9 @@ class ActiveRecord
 		return $this->_originalValues[$field];
 	}
 	
-	public function dumpData()
+	public function dumpData($exit = false)
 	{
-		MICS::dump($this->getData(), get_class($this));
+		MICS::dump($this->getData(), get_class($this), $exit);
 	}
 	
 	public function save($deep = true)
@@ -656,7 +656,7 @@ class ActiveRecord
 	
 	static public function getByContextObject(ActiveRecord $Record, $options = array())
 	{
-		return static::getByContext($Record::getRootClass(), $Record->ID, $options);
+		return static::getByContext($Record->getRootClass(), $Record->ID, $options);
 	}
 	
 	static public function getByContext($contextClass, $contextID, $options = array())
@@ -760,7 +760,7 @@ class ActiveRecord
 	
 	static public function getAllByContextObject(ActiveRecord $Record, $options = array())
 	{
-		return static::getAllByContext($Record::getRootClass(), $Record->ID, $options);
+		return static::getAllByContext($Record->getRootClass(), $Record->ID, $options);
 	}
 
 	static public function getAllByContext($contextClass, $contextID, $options = array())
@@ -787,8 +787,6 @@ class ActiveRecord
 	
 	static public function getAllRecordsByWhere($conditions = array(), $options = array())
 	{
-		$className = get_called_class();
-	
 		$options = MICS::prepareOptions($options, array(
 			'indexField' => false
 			,'order' => false
@@ -823,6 +821,7 @@ class ActiveRecord
 				{
 					case 'one-one':
 					{
+						// TODO: test this out, $relationship::getRootClass() might not return what we want
 						$join .= sprintf(' JOIN `%1$s` AS `%2$s` ON(`%2$s`.`%3$s` = `%4$s`)', $rel['class']::$tableName, $relationship::getRootClass(), $rel['foreign'], $rel['local']);
 						break;
 					}
@@ -873,7 +872,7 @@ class ActiveRecord
 		$params = array(
 			$options['calcFoundRows'] ? 'SQL_CALC_FOUND_ROWS' : ''
 			, static::$tableName
-			, $className::getRootClass()
+			, static::getRootClass()
 			, $join
 			, $conditions ? join(') AND (', $conditions) : '1'
 		);
@@ -945,7 +944,7 @@ class ActiveRecord
 		return static::instantiateRecords(DB::allRecords($query, $params));
 	}
 
-	static public function getTableByQuery($keyField, $query, $params)
+	static public function getTableByQuery($keyField, $query, $params = array())
 	{
 		return static::instantiateRecords(DB::table($keyField, $query, $params));
 	}
@@ -978,9 +977,6 @@ class ActiveRecord
 			,'alwaysSuffix' => false
 			,'format' => '%s:%u'
 		));
-		
-		// transliterate accented characters
-		$text = iconv('UTF-8', 'ASCII//TRANSLIT', $text);
 	
 		// strip bad characters
 		$handle = $strippedText = preg_replace(
@@ -1241,7 +1237,7 @@ class ActiveRecord
 				$options['local'] = 'ID';	
 					
 			if(empty($options['contextClass']))
-				$options['contextClass'] = get_called_class();
+				$options['contextClass'] = static::getRootClass();
 				
 			if(!isset($options['indexField']))
 				$options['indexField'] = false;
@@ -1303,6 +1299,7 @@ class ActiveRecord
 			if(empty($options['linkLocal']))
 				$options['linkLocal'] = static::getRootClass() . 'ID';
 		
+			// TODO: $options['class']::getRootClass() might not return what we want, it expects an instance
 			if(empty($options['linkForeign']))
 				$options['linkForeign'] = $options['class']::getRootClass() . 'ID';
 		
@@ -1433,6 +1430,11 @@ class ActiveRecord
 					
 					return $this->_convertedValues[$field];
 				}
+				case 'json':
+				{
+					return json_decode($value);
+					break;
+				}
 				case 'serialized':
 				{
 					if(!isset($this->_convertedValues[$field]))
@@ -1556,6 +1558,11 @@ class ActiveRecord
 			case 'decimal':
 			{
 				$value = preg_replace('/[^-\d.]/','', $value);
+				break;
+			}
+			case 'json':
+			{
+				$value = json_encode($value);
 				break;
 			}
 			
@@ -1795,19 +1802,23 @@ class ActiveRecord
 				}
 				
 				// TODO: support indexField, conditions, and order
-				
-				$this->_relatedObjects[$relationship] = $rel['class']::getAllByQuery(
-					'SELECT Related.* FROM `%s` Link JOIN `%s` Related ON (Related.`%s` = Link.%s) WHERE Link.`%s` = %u AND %s'
-					, array(
-						$rel['linkClass']::$tableName
-						,$rel['class']::$tableName
-						,$rel['foreign']
-						,$rel['linkForeign']
-						,$rel['linkLocal']
-						,$this->_getFieldValue($rel['local'])
-						,$rel['conditions'] ? join(' AND ', $rel['conditions']) : '1'
-					)
+				$query = 'SELECT Related.* FROM `%s` Link JOIN `%s` Related ON (Related.`%s` = Link.%s) WHERE Link.`%s` = %u AND %s';
+				$params = array(
+					$rel['linkClass']::$tableName
+					,$rel['class']::$tableName
+					,$rel['foreign']
+					,$rel['linkForeign']
+					,$rel['linkLocal']
+					,$this->_getFieldValue($rel['local'])
+					,$rel['conditions'] ? join(' AND ', $rel['conditions']) : '1'
 				);
+				
+				if($rel['indexField']) {
+					$this->_relatedObjects[$relationship] = $rel['class']::getTableByQuery($rel['class']::_cn($rel['indexField']), $query, $params);
+				}
+				else {
+					$this->_relatedObjects[$relationship] = $rel['class']::getAllByQuery($query, $params);
+				}
 				
 				// hook relationship for invalidation
 				static::$_classFields[get_called_class()][$rel['local']]['relationships'][$relationship] = true;
@@ -1849,10 +1860,8 @@ class ActiveRecord
 			}
 			else
 			{
-				$contextClass = get_class($value);
-				
 				// set Class and ID
-				$this->_setFieldValue($rel['classField'], $contextClass::getRootClass());
+				$this->_setFieldValue($rel['classField'], $value->getRootClass());
 				$this->_setFieldValue($rel['local'], $value->__get($rel['foreign']));
 			}
 
@@ -2065,12 +2074,12 @@ class ActiveRecord
 	}
 	
 	
-	public function getNoun($count = 1)
+	static public function getNoun($count = 1)
 	{
 		return ($count == 1) ? static::$singularNoun : static::$pluralNoun;
 	}
 	
-	public function getRootClass($boundingParentClass = __CLASS__)
+	static public function getRootClass($boundingParentClass = __CLASS__)
 	{
 		if(static::$rootClass)
 		{
@@ -2090,7 +2099,7 @@ class ActiveRecord
 		}		
 	}
 	
-	public function getDefaultClass()
+	static public function getDefaultClass()
 	{
 		if(static::$defaultClass)
 		{
@@ -2100,7 +2109,7 @@ class ActiveRecord
 		return static::getRootClass();
 	}
 	
-	public function getSubClasses()
+	static public function getSubClasses()
 	{
 		if(static::$subClasses)
 		{
