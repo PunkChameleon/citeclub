@@ -52,10 +52,7 @@
 								<textarea id="text" name="text" rows="20" cols="100"></textarea><br/>
 								<input type="submit" id="editBtn" value="Edit" />
 							</form>
-							<input type="text"  id="keywords" class="filter" value"" placeholder="Search for Something to Cite Specifically...">
-							<input type="submit" class="button" id="newPage" value="Look">
-							<label>Or...</label>
-							<input type="submit" class="button" id="dice" value="Roll the Dice">
+							
 						{else}
 							Please <a href="#" id="showLogin">log in</a> or <a href="{$wikiURL}/w/index.php?title=Special:UserLogin&returnto=Main+Page&type=signup">create an account</a> to start citing! 
 							<!--<form method="POST" id="login" action="/action/login.php">
@@ -64,14 +61,20 @@
 							<input type="submit" value="Go" />-->
 						</form>
 						{/if}
+						<form>
+							<input type="text"  id="keywords" class="filter" value"" placeholder="Search for Something to Cite Specifically...">
+							<input type="submit" class="button" id="newPage" value="Look">
+							<label>Or...</label>
+							<input type="submit" class="button" id="dice" value="Roll the Dice">
+						</form>
 					</form>
 					<article id="loader">
 						<img src="img/ajax-loader.gif">
 					</article>
 				</header>
 				<section id="quoting_area">
-				<h2>From the article on <a href="#" id="article_link" target="_blank">Richard Stallman</a>...</h2>
-						<article id="quote"><p>"One of his criteria for giving an interview to a journalist is that the journalist agree to use his terminology throughout the article.[65] <span>Sometimes he has even required journalists to read parts of the GNU philosophy before an interview, for "efficiency's sake".<sup>[citation needed]</sup></span>He has been known to turn down speaking requests over some terminology issues.[66]</p></article>
+					<h2>From the article on <a href="#" id="article_link" target="_blank"></a>...</h2>
+					<article id="quote"><!--<p>"One of his criteria for giving an interview to a journalist is that the journalist agree to use his terminology throughout the article.[65] <span>Sometimes he has even required journalists to read parts of the GNU philosophy before an interview, for "efficiency's sake".<sup>[citation needed]</sup></span>He has been known to turn down speaking requests over some terminology issues.[66]</p>--></article>
 				</section>
 				<section id="play_area"><!-- Start Play Area -->
 					<article id="cite_or_skip">

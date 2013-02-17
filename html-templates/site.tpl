@@ -28,6 +28,7 @@
 		<!-- End Site / Application -->
 
 		<script src="js/vendor/jquery-1.8.2.min.js"></script>
+		<script src="js/vendor/spin.min.js"></script>
 		<script src="/js/utils.js"></script>
 		<script src="/js/classes/Wiki.js"></script>
 		<script src="/js/classes/WikitextProcessor.js"></script>
