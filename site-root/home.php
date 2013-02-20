@@ -11,6 +11,7 @@
 	$pageId		= $_GET['pageid'];	
 	$url		= $_GET['url'];
 	$question	= $_GET['question'];
+	$wikiURL	= Wiki::$wikiURL;
 
 	// populate array with data to pass to template
 	$data = array(
@@ -18,7 +19,8 @@
 					'result' 		 => $result,
 					'pageId'		 => $pageId,
 					'url'			 => $url,
-					'question'		 => $question
+					'question'		 => $question,
+					'wikiURL'		 => $wikiURL
 	);
 	
 	// load template

@@ -16,3 +16,34 @@ function randomInt(min, max) {
 	
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function citationWikitext(attributes) {
+	
+	/*
+	* Ex.) {
+			'type': 'news', 
+			'fields': {
+				'last': 'Caisse',
+				'first': 'Peter',
+				'title': 'Good Stuff'
+			}
+			
+	}
+	*/
+	
+	if (attributes.length > 0) {
+		// open
+		var wikitext = "<ref>{{cite " + attributes.type + "|";
+		// loop over dictionary
+		_.map(attributes.fields, function(key, value) {
+			wikitext += key + "=" + value + "|";
+		});
+		// close
+		wikitext += "}}</ref>";
+		// return wikitext
+		return wikitext;
+	} else {
+		return null;
+	}
+	
+}

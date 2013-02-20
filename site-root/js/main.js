@@ -4,6 +4,9 @@ $(document).ready(function() {
 	$('form#edit').hide();
 	$('form#login').hide();
 
+	//Initialize Colorbox
+	$(".inline").colorbox({inline:true, width:"50%"});
+	//$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
 
 	function showCorrectForm(param) {
 			$('#cite_buttons #' + param).click(function() {

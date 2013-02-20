@@ -10,6 +10,7 @@
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/vendor/colorbox.css">
 		<link rel="stylesheet/less" type="text/css" href="css/style.less">
 		<script src="js/vendor/less.js" type="text/javascript"></script>
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
@@ -29,10 +30,11 @@
 
 		<script src="js/vendor/jquery-1.8.2.min.js"></script>
 		<script src="js/vendor/spin.min.js"></script>
+		<script src="js/vendor/jquery.colorbox-min.js"></script>
 		<script src="/js/utils.js"></script>
 		<script src="/js/classes/Wiki.js"></script>
 		<script src="/js/classes/WikitextProcessor.js"></script>
 		<script src="/js/main.js"></script>
-        <script src="js/plugins.js"></script>
+        <script src="/js/plugins.js"></script>
     </body>
 </html>

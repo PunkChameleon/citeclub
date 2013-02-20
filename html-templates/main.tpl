@@ -54,12 +54,21 @@
 							</form>
 							
 						{else}
-							Please <a href="#" id="showLogin">log in</a> or <a href="{$wikiURL}/w/index.php?title=Special:UserLogin&returnto=Main+Page&type=signup">create an account</a> to start citing! 
-							<!--<form method="POST" id="login" action="/action/login.php">
-								Username: <input type="text" id="username" name="username" /><br/>
-								Password: <input type="password" id="password" name="password" /><br/>
-							<input type="submit" value="Go" />-->
+							Please <a href="#login_info" id="showLogin" class="inline">log in</a> or <a class="iframe" target="_blank" href="{$wikiURL}/w/index.php?title=Special:UserLogin&returnto=Main+Page&type=signup">create an account</a> to start citing! 
+							
+							<div style="display:none">
+								<div id="login_info">
+									<form method="POST" id="login" action="/action/login.php">
+										<label>Username: </label><input type="text" id="username" name="username">
+										<label>Password:</label> <input type="password" id="password" name="password">
+										<input type="submit" value="Go">
+									</form>
+								</div>
+							</div>
+							
+
 						</form>
+
 						{/if}
 						<form>
 							<input type="text"  id="keywords" class="filter" value"" placeholder="Search for Something to Cite Specifically...">
@@ -202,9 +211,16 @@
 						</form>
 				</article>
 				</section><!-- End Play Area -->
-				
+				<footer>
+				<ul>
+					<li><a href="#">About Cite Club</a></li>
+					<li><a href="#">How to Cite Like a Boss</a></li>
+					<li><a href="#">Contribute</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+			</footer>
 			</div>
-	
+			
 		</div><!-- End Wrapper -->
 
 {/block}

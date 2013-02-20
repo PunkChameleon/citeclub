@@ -286,7 +286,8 @@ iframe {
 
 #play_area {
 	
-	height:300px;
+	height:100%;
+	min-height:300px;
 	
 	article {
 		padding:30px 0;
@@ -327,5 +328,47 @@ iframe {
 #forms {
 	form {
 		display:none;
+	}
+}
+
+/*
+footer {
+	border-top:3px dotted white;
+	background-color: @primary;
+
+	ul {
+		width:960px;
+		margin:0 auto;
+		text-align: center;
+
+		li {
+			margin:50px 56px;
+			display:inline-block;
+			font-size:20px;
+			font-style:italic;
+
+			a {
+				color:white;
+			}
+		}
+	}
+} */
+
+
+footer {
+	border-top:3px dotted @primary;
+
+	ul {
+
+		li {
+			margin:20px 46px;
+			display:inline-block;
+			font-size:20px;
+			font-style:italic;
+
+			a {
+				/*color:@primary;*/
+			}
+		}
 	}
 }
