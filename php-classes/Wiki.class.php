@@ -11,7 +11,7 @@ class Wiki {
 	function httpRequest($url, $post="") {
 	
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Cite Club, v. 0.1');
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Cite Club, v0.1');
         curl_setopt($ch, CURLOPT_URL, ($url));
         curl_setopt($ch, CURLOPT_ENCODING, "UTF-8" );
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -52,13 +52,13 @@ class Wiki {
 		$url = static::$wikiURL . "/w/api.php?action=edit&format=xml";
 		$params = array(
 							'section'=>$sectionNum,
-	              			'summary'=>'Testing',
+	              			'summary'=>'CiteClub Citation',
 	              			'text'=>utf8_encode($text),
 	              			'pageid'=>$pageId,
 	              			'token'=>$token
               			);
-        //if (empty($captchaId)) { array_push('captchaid'=>$captchaId); }
-		//if (empty($captchaWord)) { array_push('captchaword'=>$captchaWord); }
+        if (!empty($captchaId)) { array_merge($params, array('captchaid'=>$captchaId)); }
+		if (!empty($captchaWord)) { array_merge($params, array('captchaword'=>$captchaWord)); }
 		
 		$xmlStr = static::httpRequest($url, http_build_query($params));
 		

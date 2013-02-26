@@ -54,9 +54,9 @@
 							</form>
 							
 						{else}
-							Please <a href="#login_info" id="showLogin" class="inline">log in</a> or <a class="iframe" target="_blank" href="{$wikiURL}/w/index.php?title=Special:UserLogin&returnto=Main+Page&type=signup">create an account</a> to start citing! 
-							
-							<div style="display:none">
+							<div id="please_login">
+								Please <a href="#login_info" id="showLogin" class="inline">log in</a> or <a class="iframe" target="_blank" href="{$wikiURL}/w/index.php?title=Special:UserLogin&returnto=Main+Page&type=signup">create an account</a> to start citing! 
+							</div>
 								<div id="login_info">
 									<form method="POST" id="login" action="/action/login.php">
 										<label>Username: </label><input type="text" id="username" name="username">
@@ -64,7 +64,6 @@
 										<input type="submit" value="Go">
 									</form>
 								</div>
-							</div>
 							
 
 						</form>
@@ -99,115 +98,137 @@
 						<input type="submit" class="button" id="journal" value="Journal">
 					</article>
 					<article id="forms">
-						<form id="web">
-							<label>Last Name</label>
-							<input id="last_name" type="text">
-							<label>First Name</label>
-							<input id="first_name" type="text">
-							<label>Title</label>
-							<input id="title" type="text">
-							<label>Url</label>
-							<input id="url" type="text">
-							<label>Work</label>
-							<input id="work" type="text">
-							<label>Publisher</label>
-							<input id="publisher" type="text">
-							<label>Access Date</label>
-							<input id="access_date" type="text">
-							<label>Reference Name</label>
-							<input id="reference_name" type="text">
-							<label>Reference Group</label>
-							<input id="reference_group" type="text">
-							<br>
-							<input type="button" value="Submit">
+						<form id="web" method="POST" action="/action/edit.php">
+							<div class="form_holder">
+								<label>Last Name</label>
+								<input id="last" type="text">
+								<label>First Name</label>
+								<input id="first" type="text">
+								<label>Title</label>
+								<input id="title" type="text">
+								<label>Url</label>
+								<input id="url" type="text">
+							</div>
+							<div class="form_holder">
+								<label>Work</label>
+								<input id="work" type="text">
+								<label>Publisher</label>
+								<input id="publisher" type="text">
+								<label>Access Date</label>
+								<input id="accessdate" type="text">
+								<label></label>
+								<input type="submit" value="Submit" class="button" >
+							</div>
+						
+							<input type="hidden" id="section" name="section" />
+							<input type="hidden" id="pageId" name="pageId" />
+							<input type="hidden" id="text" name="text" />
+							
 						</form>
-						<form id="news">
-							<label>Last Name</label>
-							<input id="last_name" type="text">
-							<label>First Name</label>
-							<input id="first_name" type="text">
-							<label>Title</label>
-							<input id="title" type="text">
-							<label>Url</label>
-							<input id="url" type="text">
-							<label>Title</label>
-							<input id="title" type="text">
-							<label>Access Date</label>
-							<input id="access_date" type="text">
-							<label>Date</label>
-							<input id="date" type="text">
-							<label>Reference Name</label>
-							<input id="reference_name" type="text">
-							<label>Reference Group</label>
-							<input id="reference_group" type="text">
-							<br>
-							<input type="button" value="Submit">
+						<form id="news" method="POST" action="/action/edit.php">
+							<div class="form_holder">
+								<label>Last Name</label>
+								<input id="last" type="text">
+								<label>First Name</label>
+								<input id="first" type="text">
+								<label>Title</label>
+								<input id="title" type="text">
+								<label>Url</label>
+								<input id="url" type="text">
+							</div>
+							<div class="form_holder">
+								<label>Access Date</label>
+								<input id="accessdate" type="text">
+								<label>Newspaper</label>
+								<input id="newspaper" type="text">
+								<label>Date</label>
+								<input id="date" type="text">
+								<label></label>
+								<input type="submit" value="Submit" class="button" >
+							</div>
+
+							<input type="hidden" id="section" name="section" />
+							<input type="hidden" id="pageId" name="pageId" />
+							<input type="hidden" id="text" name="text" />
+							
 						</form>
-						<form id="book">
-							<label>Last Name</label>
-							<input id="last_name" type="text">
-							<label>First Name</label>
-							<input id="first_name" type="text">
-							<label>Title</label>
-							<input id="title" type="text">
-							<label>Year</label>
-							<input id="year" type="text">
-							<label>Publisher</label>
-							<input id="publisher" type="text">
-							<label>Location</label>
-							<input id="location" type="text">
-							<label>ISBN</label>
-							<input id="isbn" type="text">
-							<label>Pages</label>
-							<input id="pages" type="text">
-							<label>URL</label>
-							<input id="url" type="text">
-							<label>Reference Name</label>
-							<input id="reference_name" type="text">
-							<label>Reference Group</label>
-							<input id="reference_group" type="text">
-							<br>
-							<input type="button" value="Submit">
+						<form id="book" method="POST" action="/action/edit.php">
+							<div class="form_holder">
+								<label>Last Name</label>
+								<input id="last_name" type="text">
+								<label>First Name</label>
+								<input id="first_name" type="text">
+								<label>Title</label>
+								<input id="title" type="text">
+								<label>Year</label>
+								<input id="year" type="text">
+								<label>Publisher</label>
+								<input id="publisher" type="text">
+							</div>
+							<div class="form_holder">
+								<label>Location</label>
+								<input id="location" type="text">
+								<label>ISBN</label>
+								<input id="isbn" type="text">
+								<label>Page</label>
+								<input id="page" type="text">
+								<label>Pages</label>
+								<input id="pages" type="text">
+								<label>URL</label>
+								<input id="url" type="text">
+								<label></label>
+								<input type="submit" value="Submit" class="button" >
+							</div>
+							<input type="hidden" id="section" name="section" />
+							<input type="hidden" id="pageId" name="pageId" />
+							<input type="hidden" id="text" name="text" />
+
 						</form>
-						<form id="journal">
-							<label>Last Name</label>
-							<input id="last_name" type="text">
-							<label>First Name</label>
-							<input id="first_name" type="text">
-							<label>Coauthor(s)</label>
-							<input id="coauthors" type="text">
-							<label>Title</label>
-							<input id="title" type="text">
-							<label>Journal</label>
-							<input id="journal" type="text">
-							<label>Date</label>
-							<input id="date" type="text">
-							<label>Year</label>
-							<input id="year" type="text">
-							<label>Month</label>
-							<input id="month" type="text">
-							<label>Volume</label>
-							<input id="volume" type="text">
-							<label>Series</label>
-							<input id="series" type="text">
-							<label>Issue</label>
-							<input id="issue" type="text">
-							<label>Pages</label>
-							<input id="pages" type="text">
-							<label>DOI</label>
-							<input id="doi" type="text">
-							<label>PMID</label>
-							<input id="PMID" type="text">
-							<label>URL</label>
-							<input id="url" type="text">
-							<label>Access Date</label>
-							<input id="access_date" type="text">
-							<label>Reference Name</label>
-							<input id="reference_name" type="text">
-							<label>Reference Group</label>
-							<input id="reference_group" type="text">
-							<br>
-							<input type="button" value="Submit">
+						<form id="journal" method="POST" action="/action/edit.php">
+
+							<div class="form_holder">
+								<label>Last Name</label>
+								<input id="last_name" type="text">
+								<label>First Name</label>
+								<input id="first_name" type="text">
+								<label>Coauthors</label>
+								<input id="first_name" type="text">
+								<label>Title</label>
+								<input id="title" type="text">
+								<label>Journal</label>
+								<input id="journal" type="text">
+								<label>Date</label>
+								<input id="date" type="text">
+								<label>Year</label>
+								<input id="year" type="text">
+								<label>Month</label>
+								<input id="month" type="text">
+								<label>Volume</label>
+								<input id="volume" type="text">
+							</div>
+							<div class="form_holder">
+									<label>Series</label>
+								<input id="series" type="text">
+								<label>Issue</label>
+								<input id="issue" type="text">
+								<label>Page</label>
+								<input id="page" type="text">
+								<label>Pages</label>
+								<input id="pages" type="text">
+								<label>DOI</label>
+								<input id="doi" type="text">
+								<label>PMID</label>
+								<input id="pmid" type="text">
+								<label>URL</label>
+								<input id="url" type="text">
+								<label>Access Date</label>
+								<input id="accessdate" type="text">
+								<label></label>
+								<input type="submit" value="Submit" class="button" >
+							</div>
+							<input type="hidden" id="section" name="section" />
+							<input type="hidden" id="pageId" name="pageId" />
+							<input type="hidden" id="text" name="text" />
 						</form>
 				</article>
 				</section><!-- End Play Area -->

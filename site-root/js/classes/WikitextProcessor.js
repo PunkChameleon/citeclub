@@ -4,7 +4,7 @@ var WikitextProcessor = {
 	* Processes Wikitext (or Wiki markup)
 	*/
 
-	needsCitationPattern: /\{{2}Citation needed((?!}})[^])*\}{2}/,
+	needsCitationPattern: /\{{2}(Citation needed|Fact|Cn)((?!}})[^])*\}{2}/, // See http://en.wikipedia.org/wiki/Template:Citation_needed
 
 	citationNeededParagraph: function(text) {
 		
@@ -68,9 +68,52 @@ var WikitextProcessor = {
 		
 		var sections = this.citationNeededSections(text);
 		
-		if (sections !== null)
+		if (sections !== undefined && sections !== null && sections.length > 0)
 			return sections[0];
 		else
 			return null;
+	},
+	
+	buildCitationWikitext: function(attributes) {
+	
+		/*
+		* Hashmap of citation attributes is translated into wikitext
+		* ex.) 
+				{'type': 'news', 'fields': { 'last': 'Caisse', 'first': 'Peter', 'title': 'Good Stuff'}} 
+												becomes 
+				<ref>{{cite news|last=Caisse|first=Peter|title=Good Stuff}}</ref>
+		*/
+		
+		if (attributes !== undefined && attributes !== null) {
+			try {
+				// open
+				var wikitext = "<ref>{{cite " + attributes.type;
+				// loop over dictionary
+				var fields = attributes.fields;
+				for (var i in fields) {
+					wikitext +=  "|" + i + "=" + fields[i];
+				}
+				// close
+				wikitext += "}}</ref>";
+				// return wikitext
+				return wikitext;
+			} catch (err) {
+				console.log(err);
+				return null;
+			}
+		} else {
+			return null;
+		}
+		
+	},
+	
+	citedSectionWikitext: function(sectionText, citationText) {
+		
+		/*
+		* Replaces citation need wikitext ({{Citation needed}}) in section text
+		* with citation wikitext (<ref>{{cite web|title=Title}}</ref>)
+		*/
+			
+		return sectionText.replace(WikitextProcessor.needsCitationPattern, citationText);
 	}
 }

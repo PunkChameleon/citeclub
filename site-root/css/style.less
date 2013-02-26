@@ -194,9 +194,22 @@ header.fixed {
 				margin-right:0;
 			}
 		}
-	
+		
 	}
 	
+
+		#please_login {
+			text-align:right;
+		}
+
+		#login_info {
+			display:none;
+
+			input {
+				width:100px;
+			}
+		}
+
 	form {
 		float:right;
 		
@@ -305,6 +318,8 @@ iframe {
 			font-size:25px;
 			font-style:italic;
 		}
+
+		
 	}
 
 	#cite_or_skip {
@@ -328,6 +343,50 @@ iframe {
 #forms {
 	form {
 		display:none;
+		width: 870px;
+		margin:0 133px;
+		min-height:400px;
+
+	
+		label{
+		    display: inline-block;
+		    float: left;
+		    clear: left;
+		    width: 250px;
+		    text-align: right;
+		}
+
+		input[type="text"] {
+		  display: inline-block;
+		  float: left;
+		}
+
+		input[type="submit"] {
+			display: block;
+			clear: both;	
+		}
+
+		.form_holder {
+			width:49%;
+			float:left;
+
+			label {
+				margin:0;
+				padding:0;
+				text-align:left;
+				height:30px;
+			}
+
+			.button {
+				width:230px;
+				height: 35px;
+				font-size:25px;
+			}
+		}
+	}
+
+	form#journal {
+		min-height: 530px;
 	}
 }
 

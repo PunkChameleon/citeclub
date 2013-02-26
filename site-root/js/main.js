@@ -1,12 +1,63 @@
 $(document).ready(function() {
 	
+	// TODO: automatically add a <references/> tag to the bottom of the article if there isn't one already
+	// (the article will be malformed if there is a <ref> tag in the article but no <references/> tag)
+	
 	// hide edit and login forms
 	$('form#edit').hide();
 	$('form#login').hide();
 
 	//Initialize Colorbox
-	$(".inline").colorbox({inline:true, width:"50%"});
+	//$(".inline").colorbox({inline:true, width:"50%"});
+	
+	$('#showLogin').click(function() {
+		$('#please_login').hide();
+		$('#login_info').show();
+	});
+	
 	//$(".iframe").colorbox({iframe:true, width:"80%", height:"80%"});
+	
+	// pre-submission form data prep
+	$('form#web, form#news, form#book, form#journal').submit(function() {
+		prepareForm(this);
+	});
+
+	function prepareForm(form) {
+		
+		/*
+		* Prepare form for submission
+		*/
+		
+		// create hashmap used to build citation wikitext (<ref>) from form data
+		var citationData = {};
+		citationData['type'] = $(form).attr('id'); // form id should correspond to type of citation
+		var fields = {};
+		$(form).find('input:text').each(function() {
+			var id = $(this).attr('id'); // text input id should correspond to citation attribute name
+			var value = $(this).val();
+			if (value !== "")
+				fields[id] = value;
+		});
+		citationData['fields'] = fields;
+		
+		// get citation wikitext
+		var oldSectionText = $(form).find('#text').val();
+		var citationWikitext = WikitextProcessor.buildCitationWikitext(citationData);
+		var newSectionWikitext = WikitextProcessor.citedSectionWikitext(oldSectionText, citationWikitext);
+		
+		if (newSectionWikitext === undefined || newSectionWikitext === null) {
+			// something went wrong; don't submit form
+			return false;
+		}
+			
+		// append new hidden input element to form containing citation wikitext
+		$('<input>').attr({
+		    type: 'hidden',
+		    id: 'newSectionText',
+		    name: 'newSectionText',
+		    value: newSectionWikitext
+		}).appendTo(form);
+	}
 
 	function showCorrectForm(param) {
 			$('#cite_buttons #' + param).click(function() {
@@ -81,80 +132,79 @@ $(document).ready(function() {
 			$('form#login').show();
 		});
 	});
-});
 
-function newPage(wiki, keywords) {
-
-	/*
-	* Gets new page URL, displays iframe (in case it's hidden), and sets iframe src to it
-	*/
-
-	// disable button and edit form while searching
-	$('#newPage').prop('disabled', true);
-	$('#explanation, blockquote, form#edit').hide();
-	$('#searching').empty();
-
-	wiki.citationNeededPage(keywords, function(pageData) {
-		if (pageData != null) {
-		// data found!
-
-			// get page id and title
-			var id = pageData.id;
-			var title = pageData.title;
-			
-			wiki.getPageContent(id, function(content) {
-				wiki.getPageHTML(id, function(html) {
-												
-					$('#searching').html("Page found!");
-
-					// give page id to edit form
-					$('form#edit #pageId').val(id);
-
-					// text for this section in Wikipedia markup language
-					var firstSection = WikitextProcessor.firstCitationNeededSectionText(content);
-					var sectionText;
-					var sectionNum;
-					
-					if (firstSection !== null) {
-						sectionNum = firstSection['section'];
-						sectionText = firstSection['text'];
-					} else {
-						sectionText = content;
-					}
-					
-					// set section
-					if (sectionNum !== undefined) {
-						$('form#edit #section').val(sectionNum);
-					}
-					
-					// set text
-					$('form#edit #text').html(sectionText);
-					
-					// set article title & link
-					$('#article_link').html('<a href="' + wiki.urlFromPageId(id) + '">' + title + '</a>');
-					
-					// set paragraph 
-					var paragraphHTML = $(html).find(":contains('citation needed')").parent().html();
-					$('#quote').html(paragraphHTML);
-					
-					// show article info & edit form
-					$('#explanation, #quote, form#edit').show();
-					
-					// enable button
-					$('#newPage').prop('disabled', false);
+	function newPage(wiki, keywords) {
+	
+		/*
+		* Gets new page URL, displays iframe (in case it's hidden), and sets iframe src to it
+		*/
+	
+		// disable button and edit form while searching
+		$('#newPage').prop('disabled', true);
+		$('#explanation, blockquote, form#edit').hide();
+		$('#searching').empty();
+	
+		wiki.citationNeededPage(keywords, function(pageData) {
+			if (pageData != null) {
+			// data found!
+	
+				// get page id and title
+				var id = pageData.id;
+				var title = pageData.title;
+				
+				wiki.getPageContent(id, function(content) {
+					wiki.getPageHTML(id, function(html) {
+													
+						$('#searching').html("Page found!");
+	
+						// give page id to edit form
+						$('form #pageId').val(id);
+	
+						// text for this section in Wikipedia markup language
+						var firstSection = WikitextProcessor.firstCitationNeededSectionText(content);
+						var sectionText;
+						var sectionNum;
+						
+						if (firstSection !== null) {
+							sectionNum = firstSection['section'];
+							sectionText = firstSection['text'];
+						} else {
+							sectionText = content;
+						}
+						
+						// set section
+						if (sectionNum !== undefined) {
+							$('form #section').val(sectionNum);
+						}
+						
+						// set text
+						$('form #text').val(sectionText);
+						
+						// set article title & link
+						$('#article_link').html('<a href="' + wiki.urlFromPageId(id) + '">' + title + '</a>');
+						
+						// set paragraph 
+						var paragraphHTML = $(html).find(":contains('citation needed')").parent().html();
+						$('#quote').html(paragraphHTML);
+						
+						// show article info & edit form
+						$('#explanation, #quote, form#edit').show();
+						
+						// enable button
+						$('#newPage').prop('disabled', false);
+					});
 				});
-			});
-
-		} else {
-			// couldn't find any pages
-			$('#searching').html("No pages found.");
-			// hide article info
-			$('#explanation, blockquote, form#edit').hide();
-			// enable button
-			$('#newPage').prop('disabled', false);
-		}
-
-	});
-}
-
+	
+			} else {
+				// couldn't find any pages
+				$('#searching').html("No pages found.");
+				// hide article info
+				$('#explanation, blockquote, form#edit').hide();
+				// enable button
+				$('#newPage').prop('disabled', false);
+			}
+	
+		});
+	}
+});
 
