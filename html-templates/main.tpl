@@ -44,7 +44,7 @@
 							<h2>cite the power</h2>
 						</article>
 					</a>
-					<form>
+					<div id="login_area">
 						{if $lgusername }
 							<form method="POST" id="edit" action="/action/edit.php">
 								<input type="hidden" id="section" name="section" />
@@ -55,7 +55,7 @@
 							
 						{else}
 							<div id="please_login">
-								Please <a href="#login_info" id="showLogin" class="inline">log in</a> or <a class="iframe" target="_blank" href="{$wikiURL}/w/index.php?title=Special:UserLogin&returnto=Main+Page&type=signup">create an account</a> to start citing! 
+								Please <a href="#" id="showLogin">log in</a> or <a target="_blank" href="{$wikiURL}/w/index.php?title=Special:UserLogin&returnto=Main+Page&type=signup">create an account</a> to start citing! 
 							</div>
 								<div id="login_info">
 									<form method="POST" id="login" action="/action/login.php">
@@ -66,7 +66,7 @@
 								</div>
 							
 
-						</form>
+						</div>
 
 						{/if}
 						<form>
