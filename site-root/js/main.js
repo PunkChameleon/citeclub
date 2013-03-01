@@ -181,10 +181,23 @@ $(document).ready(function() {
 						$('form #text').val(sectionText);
 						
 						// set article title & link
-						$('#article_link').html('<a href="' + wiki.urlFromPageId(id) + '">' + title + '</a>');
+						var linkHTML = ich.articleLink({ 	
+															url: wiki.urlFromPageId(id), 
+					 										title: title
+														});
+						$('#article_link').html(linkHTML);
 						
 						// set paragraph 
-						var paragraphHTML = $(html).find(":contains('citation needed')").parent().html();
+						var paragraphHTML = function() {
+							var citationNeededSelector = ":contains('citation needed')";
+							var $citationNeededElem = $(html).find(citationNeededSelector);
+							var $parent = $citationNeededElem.parent();
+							if ($parent[0].nodeName == "TABLE") {
+								// table
+								return $($parent).children().find(citationNeededSelector).text();
+							}
+							return $parent.html();
+						}
 						$('#quote').html(paragraphHTML);
 						
 						// show article info & edit form

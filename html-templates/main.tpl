@@ -46,32 +46,24 @@
 					</a>
 					<div id="login_area">
 						{if $lgusername }
-							<form method="POST" id="edit" action="/action/edit.php">
-								<input type="hidden" id="section" name="section" />
-								<input type="hidden" id="pageId" name="pageId" />
-								<textarea id="text" name="text" rows="20" cols="100"></textarea><br/>
-								<input type="submit" id="editBtn" value="Edit" />
-							</form>
-							
+							<div id="user_greeting">
+								Hello, {$lgusername}! <a href='/action/logout.php'>logout</a>
+							</div>							
 						{else}
 							<div id="please_login">
 								Please <a href="#" id="showLogin">log in</a> or <a target="_blank" href="{$wikiURL}/w/index.php?title=Special:UserLogin&returnto=Main+Page&type=signup">create an account</a> to start citing! 
 							</div>
-								<div id="login_info">
-									<form method="POST" id="login" action="/action/login.php">
-										<label>Username: </label><input type="text" id="username" name="username">
-										<label>Password:</label> <input type="password" id="password" name="password">
-										<input type="submit" value="Go">
-									</form>
-								</div>
-							
-
-						</div>
-
+							<div id="login_info">
+								<form method="POST" id="login" action="/action/login.php">
+									<label>Username: </label><input type="text" id="username" name="username">
+									<label>Password:</label> <input type="password" id="password" name="password">
+									<input type="submit" value="Go">
+								</form>
+							</div>
 						{/if}
 						<form>
 							<input type="text"  id="keywords" class="filter" value"" placeholder="Search for Something to Cite Specifically...">
-							<input type="submit" class="button" id="newPage" value="Look">
+							<input type="submit" class="button" id="newPage" value="Search">
 							<label>Or...</label>
 							<input type="submit" class="button" id="dice" value="Roll the Dice">
 						</form>
@@ -243,5 +235,14 @@
 			</div>
 			
 		</div><!-- End Wrapper -->
+
+		{literal} <!-- this tells Dwoo not to interpret any of the following -->
+
+		<!-- ICanHaz templates -->
+		<script id="articleLink" type="text/html">
+			<a href="{{ url }}">{{ title }}</a>
+		</script>
+
+		{/literal}
 
 {/block}

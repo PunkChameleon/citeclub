@@ -14,6 +14,7 @@
 		<link rel="stylesheet/less" type="text/css" href="css/style.less">
 		<script src="js/vendor/less.js" type="text/javascript"></script>
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+		<script src="js/vendor/ICanHaz.min.js"></script>
 
     </head>
     <body>
