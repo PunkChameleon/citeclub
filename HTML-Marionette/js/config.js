@@ -38,7 +38,7 @@ requirejs.config({
 
 });
 
-define(["common", "jquery", "backbone", "marionette"], function(Common, $, Backbone, Marionette) {
+define(["common", "jquery", "backbone", "marionette", "mustache"], function(Common, $, Backbone, Marionette, Mustache) {
 
     var CC = Common.CC;
 
@@ -59,5 +59,5 @@ define(["common", "jquery", "backbone", "marionette"], function(Common, $, Backb
     $(document).ready(function(){
       CC.App.start();
     });
-    
+
 });
