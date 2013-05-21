@@ -1,0 +1,25 @@
+AppLayout
+	*header
+		HeaderLayout
+			*login
+				LoginView
+				LogoutView
+			*search
+				SearchView
+	*content
+		ContentLayout
+			*quote
+				QuoteView
+			*form
+				EditArticleView
+				SiteOrSkipView
+				SourceView
+	*footer
+		FooterView
+
+GlobalRouter
+GlobalController
+
+UserModel
+ArticleModel
+
