@@ -59,4 +59,5 @@ define(["common", "jquery", "backbone", "marionette"], function(Common, $, Backb
     $(document).ready(function(){
       CC.App.start();
     });
+    
 });
