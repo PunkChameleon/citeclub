@@ -1,0 +1,412 @@
+/* Begin LESS */
+
+/* Import the fun things */
+@import url(http://fonts.googleapis.com/css?family=Antic+Slab);
+
+/* Make a Nice, Small Library */
+
+.clear { clear:both; }
+.fleft { float:left; }
+.fright { float:right; }
+
+/* Define da Variables */
+
+@primary: #8cbfe3;
+
+/* Mix 'em in... Shaken, not stirred, you know. /*/
+
+.border-radius (@radius: 10px) {
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	border-radius: @radius;
+}
+
+.transition (@variables) {
+	-webkit-transition: @variables;
+	-moz-transition: @variables;
+	-o-transition:@variables;
+	transition:@variables;
+}
+
+.box-shadow (@x: 0px, @y: 3px, @blur: 5px, @alpha: 0.5) {
+	-webkit-box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+	-moz-box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+	box-shadow: @x @y @blur rgba(0, 0, 0, @alpha);
+}
+
+.scale_transform (@variables) {
+	-webkit-transform: scale(@variables);
+	-moz-transform: scale(@variables);
+	-o-transform: scale(@variables);
+	transform: scale(@variables);
+}
+
+
+/* Basics */
+body {
+	background:url(../img/index.png) repeat top center rgba(140, 191, 227, 0.19);
+	
+	#wrapper {
+		width:100%;
+		height:100%;
+		position:relative;
+		font-family: 'Antic Slab', serif;
+		padding:0;
+		margin:0;
+
+		#main_container {
+			width:960px;
+			margin:0 auto;
+			height:100%;
+		}
+	}
+}
+
+
+header {
+	width:100%;
+	height:50px;
+	
+	#logo {
+		text-align:center;
+		width:36%;
+		margin:0;
+		float:left;
+		cursor:pointer;
+		text-decoration:none;
+		
+		h1 {
+			color:@primary;
+			font-size:63px;
+			font-weight:normal;
+			margin:0;
+			
+			span {
+				color:black;
+			}
+		}
+		
+		h2 {
+			color:black;
+			font-style:italic;
+			font-size:20px;
+			line-height:22px;
+			text-align:center;
+			display:none;
+		}
+		
+	}
+	
+	nav {
+		font-weight:bold;
+		
+		ul {
+			padding:35px 20px;
+			width:54%;
+			float:right;
+		
+			li {
+				display:inline-block;
+				margin:0 30px;
+				
+				a {
+					color:black;
+					text-decoration:none;
+				}
+				
+				a:hover {
+					text-decoration:underline;
+				}
+			}
+		}
+	}
+
+}
+
+#content {
+
+	width:100%;
+	padding: 50px 0;
+	text-align:center;
+	
+	h2 {
+		color:black;
+		font-weight:bold;
+		font-size:22px;
+		line-height:24px;
+	}
+
+	form {
+		.button {
+			margin: 50px auto;
+			cursor: pointer;
+			outline: none;
+			background-color: @primary;
+			font-style:italic;
+			font-weight:normal;
+			color: white;
+			font-size:26px;
+			line-height:18px;
+			width: 53%;
+			height:45px;
+			border:1px solid black;
+			.border-radius(20px);
+		}
+
+		/*.button:hover {
+			color: white;
+			.transition(all 0.4s ease-in-out);
+			.scale_transform(1.1);
+		}*/
+	
+	}
+
+}
+
+
+/* Styles for the iframe holder */
+
+header.fixed {
+	height:70px;
+	
+	#logo {
+		width:35%;
+		
+		h1 {
+			font-size:60px;
+		}	
+	}
+	
+	nav {
+		ul {
+			padding:25px 20px 0;
+			width:52%;
+			float:left;
+			font-size:14px;
+			padding-right:0;
+		
+			li {
+				display:inline-block;
+				margin:0 30px;
+			}
+			
+			li:last-child {
+				margin-right:0;
+			}
+		}
+		
+	}
+	
+		#user_greeting {
+			text-align:right;
+		}
+
+		#please_login {
+			text-align:right;
+		}
+
+		#login_info {
+			display:none;
+
+			input {
+				width:100px;
+			}
+		}
+
+	form {
+		float:right;
+		
+		.filter {
+			.border-radius(20px);
+			width:350px;
+			padding:3px 10px;
+			font-style: italic;
+			height:19px;
+		}
+		
+		label {
+			font-style:italic;
+			margin: 0 5px;
+		}
+	}
+	
+	#loader {
+		width:32px;
+		margin:16px -715px 0 0;
+		float:right;
+		display:none;
+	}
+
+}
+
+		.button {
+			margin: 23px 0 22px;
+			cursor: pointer;
+			outline: none;
+			background-color: @primary;
+			font-style:italic;
+			font-weight:normal;
+			color: white;
+			line-height:18px;
+			border:1px solid black;
+			.border-radius(20px);
+		}
+
+		.button:hover {
+			.transition(all 0.4s ease-in-out);
+			.scale_transform(1.1);
+		} 
+
+iframe {
+	border-top: 2px solid @primary !important;
+	min-height:900px;
+	height:100%;
+}
+
+#quoting_area {
+	width:100%;
+	margin:44px 0;
+
+	h2 {
+		font-size:25px;
+		font-style:italic;
+	}
+					
+	#quote {
+			width:92%;
+			margin:0 auto;
+			font-size:25px;
+			text-align:justify;
+			
+			span {
+				font-weight:bold;
+				font-size:35px;
+				margin:7px 0;
+				font-size:25px;	
+			}
+
+			sup {
+				font-size:22px;
+				top:-.2em;
+				padding:0 2px 0 15px;
+			}
+
+			.Template-Fact {
+				font-weight:bold;
+			}
+			
+				
+		}
+		
+}
+
+#play_area {
+	
+	height:100%;
+	min-height:300px;
+	
+	article {
+		padding:30px 0;
+		margin:0 auto;
+		
+		.button {
+			width:330px;
+			height:75px;
+			font-size:35px;
+			border-radius:50px;
+		}
+		
+		label {
+			margin:0 25px;
+			font-size:25px;
+			font-style:italic;
+		}
+
+		
+	}
+
+	#cite_or_skip {
+		width:78%;		
+	}
+		
+	#cite_buttons {
+		width:98%;
+
+		label {
+			margin-left:0;
+		}
+
+		#web, #book {
+			margin-right:270px;
+		}
+	}
+	
+}
+
+#forms {
+	form {
+		display:none;
+		width: 870px;
+		margin:0 133px;
+		min-height:400px;
+
+	
+		label{
+		    display: inline-block;
+		    float: left;
+		    clear: left;
+		    width: 250px;
+		    text-align: right;
+		}
+
+		input[type="text"] {
+		  display: inline-block;
+		  float: left;
+		}
+
+		input[type="submit"] {
+			display: block;
+			clear: both;	
+		}
+
+		.form_holder {
+			width:49%;
+			float:left;
+
+			label {
+				margin:0;
+				padding:0;
+				text-align:left;
+				height:30px;
+			}
+
+			.button {
+				width:230px;
+				height: 35px;
+				font-size:25px;
+			}
+		}
+	}
+
+	form#journal {
+		min-height: 530px;
+	}
+}
+
+footer {
+	border-top:3px dotted @primary;
+
+	ul {
+
+		li {
+			margin:20px 46px;
+			display:inline-block;
+			font-size:20px;
+			font-style:italic;
+
+			a {
+				/*color:@primary;*/
+			}
+		}
+	}
+}
