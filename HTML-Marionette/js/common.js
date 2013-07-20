@@ -6,7 +6,9 @@
  *
  */
 
-define(["jquery", "backbone", "marionette"], function($, Backbone, Marionette) {
+define(["jquery", "backbone", "marionette"], function ($, Backbone, Marionette) {
+
+    'use strict';
 
     var CC = {
         App         : {},
@@ -16,10 +18,9 @@ define(["jquery", "backbone", "marionette"], function($, Backbone, Marionette) {
         Views       : {},
         Models      : {},
         Collections : {}
-    }
+    };
 
     return {
         CC : CC
-    }
-    
+    };
 });

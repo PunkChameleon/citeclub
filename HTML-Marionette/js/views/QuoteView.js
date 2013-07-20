@@ -2,7 +2,7 @@
  *
  * Author     : nweingartner
  * Date       : 7/20/2013
- * Description: Footer View.
+ * Description: Quote View.
  *
  */
 
@@ -16,9 +16,9 @@ define([
 
         var CC = Common.CC || {};
 
-        CC.Views.FooterView = Backbone.Marionette.ItemView.extend({
+        CC.Views.QuoteView = Backbone.Marionette.ItemView.extend({
 
-            template: "#footer_view_template"
+            template: "#quote_view_template"
 
         });
 });

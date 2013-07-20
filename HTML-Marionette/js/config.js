@@ -38,25 +38,33 @@ requirejs.config({
 
 });
 
-define(["common", "jquery", "backbone", "marionette", "mustache"], function(Common, $, Backbone, Marionette, Mustache) {
+define(["common", "jquery", "backbone", "marionette", "mustache", "routers/GlobalRouter"], function (Common, $, Backbone, Marionette, Mustache) {
 
-    var CC = Common.CC;
+    'use strict';
+
+    var CC = Common.CC || {};
 
     CC.App = new Backbone.Marionette.Application();
+
+    var mainRouter = new CC.Routers.GlobalRouter();
+
+    CC.App.addRegions({
+        "applicationWrapper" : "#wrapper"
+    });
  
     // Configure custom template loading, compiling and rendering
     CC.App.addInitializer(function(options) {
 
-        Backbone.Marionette.TemplateCache.prototype.compileTemplate = function(rawTemplate) {
+        Backbone.Marionette.TemplateCache.prototype.compileTemplate = function (rawTemplate) {
             return Mustache.compile(rawTemplate);
         };
 
         Backbone.history.start();
-
+        
     });
      
     // Start the app
-    $(document).ready(function(){
+    $(document).ready(function () {
       CC.App.start();
     });
 

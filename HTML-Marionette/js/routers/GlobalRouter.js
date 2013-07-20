@@ -8,21 +8,21 @@
 
 
 define([
+    "common",
     "backbone",
     "marionette",
-    "common",
     "controllers/GlobalController"
     ],
-    function(Backbone, Marionette, Common) {
+    function(Common, Backbone, Marionette) {
 
-        var CC = Common.CC;
+        var CC = Common.CC || {};
 
         CC.Routers.GlobalRouter = Backbone.Marionette.AppRouter.extend({
 
-            controller: CC.Controllers.GlobalController,
+            controller : new CC.Controllers.GlobalController(),
 
-            routes: {
-                "/": "main"
+            appRoutes: {
+                "": "main"
             }
 
         });
