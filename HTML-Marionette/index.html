@@ -11,6 +11,8 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <!--<link rel="stylesheet" href="css/bootstrap-responsive.min.css">-->
         <link rel="stylesheet" href="css/main.css">
 
         <!-- Begin LESS -->
@@ -27,36 +29,36 @@
         <div id="wrapper"></div>
 
         <script id="app_layout_template" type="text/html">
-            <header id="header"></header>
+            <header id="header" class="row-fluid"></header>
             <section id="content"></section>
             <footer id="footer"></footer>
         </script>
 
         <script id="header_layout_template" type="text/html">
-            <a href="index.html">
-                <article id="logo">
-                    <h1>*[cite] <span>club</span></h1>
-                    <h2>cite the power</h2>
-                </article>
-            </a>
-            <div id="login_area">
+            
+            <div class="logo pull-left span6">
+                <h1>*[cite] <span>club</span></h1>
+            </div>
+
+            <div class="login_area span6">
                     <div id="please_login">
                         Please <a href="#" id="showLogin">log in</a> or <a target="_blank" href="http://test.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page&type=signup">create an account</a> to start citing! 
                     </div>
-                    <div id="login_info">
+                    <!--<div id="login_info">
                         <form method="POST" id="login" action="/action/login.php">
                             <label>Username: </label><input type="text" id="username" name="username">
                             <label>Password:</label> <input type="password" id="password" name="password">
                             <input type="submit" value="Go">
                         </form>
-                    </div>
-                <form>
-                    <input type="text"  id="keywords" class="filter" value"" placeholder="Search for Something to Cite Specifically...">
-                    <input type="submit" class="button" id="newPage" value="Search">
-                    <label>Or...</label>
-                    <input type="submit" class="button" id="dice" value="Roll the Dice">
-                </form>
+                    </div>-->
+                <div class="search_area">
+                    <input type="text"  id="keywords" class="filter" placeholder="Search for Something to Cite Specifically...">
+                    <button class="button" id="newPage" value="Search">Search</button>
+                    <span>Or...</span>
+                    <button class="button" id="dice" value="Roll the Dice">Roll the Dice</button>
+                </div>
             </form>
+            </div>
         </script>
 
         <script id="quote_view_template" type="text/html">

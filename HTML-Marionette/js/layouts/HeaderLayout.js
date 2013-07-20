@@ -20,7 +20,7 @@ define([
 
             template: "#header_layout_template",
 
-            className : "main_container",
+            className : "span10 offset1",
 
             regions: {
                 login: "#login",

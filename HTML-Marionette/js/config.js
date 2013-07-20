@@ -15,7 +15,8 @@ requirejs.config({
         underscore : 'vendor/underscore.min',
         backbone   : 'vendor/backbone.min',
         marionette : 'vendor/backbone.marionette.min',
-        mustache   : 'vendor/mustache.min'
+        mustache   : 'vendor/mustache.min',
+        bootstrap  : 'vendor/bootstrap.min'
     },
 
     shim: {
@@ -32,6 +33,10 @@ requirejs.config({
 
         "underscore" : {
             exports : "_"
+        },
+
+        "bootstrap" : {
+            deps    : ["jquery"]
         }
 
     }

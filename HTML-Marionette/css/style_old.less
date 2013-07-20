@@ -44,7 +44,6 @@
 
 /* Basics */
 body {
-
     background:url(../img/index.png) repeat top center rgba(140, 191, 227, 0.19);
     
     #wrapper {
@@ -55,53 +54,71 @@ body {
         padding:0;
         margin:0;
 
-        .main_container {
+        #main_container {
+            width:960px;
             margin:0 auto;
+            height:100%;
         }
     }
 }
 
+
 header {
-    height:70px;
+    width:100%;
+    height:50px;
     
-    .logo {
-        text-align:left;
-        padding:20px 0 0 0;
+    #logo {
+        text-align:center;
+        width:36%;
+        margin:0;
+        float:left;
         cursor:pointer;
         text-decoration:none;
         
         h1 {
             color:@primary;
-            font-size:60px;
+            font-size:63px;
             font-weight:normal;
-
+            margin:0;
+            
             span {
                 color:black;
             }
         }
         
-    }
-
-    .login_area {
-
-        text-align: right;
-
-        .search_area {
-        
-            .filter {
-                .border-radius(20px);
-                width:60%;
-                padding:3px 10px;
-                font-style: italic;
-            }
-        
-            label {
-                font-style:italic;
-                margin: 0 5px;
-            }
-
+        h2 {
+            color:black;
+            font-style:italic;
+            font-size:20px;
+            line-height:22px;
+            text-align:center;
+            display:none;
         }
-
+        
+    }
+    
+    nav {
+        font-weight:bold;
+        
+        ul {
+            padding:35px 20px;
+            width:54%;
+            float:right;
+        
+            li {
+                display:inline-block;
+                margin:0 30px;
+                
+                a {
+                    color:black;
+                    text-decoration:none;
+                }
+                
+                a:hover {
+                    text-decoration:underline;
+                }
+            }
+        }
     }
 
 }
@@ -143,7 +160,78 @@ header {
 
 /* Styles for the iframe holder */
 
+header.fixed {
+    height:70px;
+    
+    #logo {
+        width:35%;
+        
+        h1 {
+            font-size:60px;
+        }   
+    }
+    
+    nav {
+        ul {
+            padding:25px 20px 0;
+            width:52%;
+            float:left;
+            font-size:14px;
+            padding-right:0;
+        
+            li {
+                display:inline-block;
+                margin:0 30px;
+            }
+            
+            li:last-child {
+                margin-right:0;
+            }
+        }
+        
+    }
+    
+        #user_greeting {
+            text-align:right;
+        }
 
+        #please_login {
+            text-align:right;
+        }
+
+        #login_info {
+            display:none;
+
+            input {
+                width:100px;
+            }
+        }
+
+    form {
+        float:right;
+        
+        .filter {
+            .border-radius(20px);
+            width:350px;
+            padding:3px 10px;
+            font-style: italic;
+            height:19px;
+        }
+        
+        label {
+            font-style:italic;
+            margin: 0 5px;
+        }
+    }
+    
+    #loader {
+        width:32px;
+        margin:16px -715px 0 0;
+        float:right;
+        display:none;
+    }
+
+}
 
         .button {
             margin: 23px 0 22px;
