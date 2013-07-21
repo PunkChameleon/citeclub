@@ -22,8 +22,6 @@ define([
 
             template: "#content_layout_template",
 
-            className : "main_container",
-
             regions: {
                 quote: "#quoting_area",
                 form : "#form_region"

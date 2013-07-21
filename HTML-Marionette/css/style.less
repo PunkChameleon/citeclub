@@ -3,12 +3,6 @@
 /* Import the fun things */
 @import url(http://fonts.googleapis.com/css?family=Antic+Slab);
 
-/* Make a Nice, Small Library */
-
-.clear { clear:both; }
-.fleft { float:left; }
-.fright { float:right; }
-
 /* Define da Variables */
 
 @primary: #8cbfe3;
@@ -144,38 +138,32 @@ header {
 /* Styles for the iframe holder */
 
 
-
-        .button {
-            margin: 23px 0 22px;
-            cursor: pointer;
-            outline: none;
-            background-color: @primary;
-            font-style:italic;
-            font-weight:normal;
-            color: white;
-            line-height:18px;
-            border:1px solid black;
-            .border-radius(20px);
-        }
-
-        .button:hover {
-            .transition(all 0.4s ease-in-out);
-            .scale_transform(1.1);
-        } 
-
-iframe {
-    border-top: 2px solid @primary !important;
-    min-height:900px;
-    height:100%;
+.button {
+    margin: 23px 0 22px;
+    cursor: pointer;
+    outline: none;
+    background-color: @primary;
+    font-style:italic;
+    font-weight:normal;
+    color: white;
+    line-height:18px;
+    border:1px solid black;
+    .border-radius(20px);
 }
+
+.button:hover {
+    .transition(all 0.4s ease-in-out);
+    .scale_transform(1.1);
+} 
+
 
 #quoting_area {
     width:100%;
-    margin:44px 0;
 
     h2 {
         font-size:25px;
         font-style:italic;
+        text-align:left;
     }
                     
     #quote {

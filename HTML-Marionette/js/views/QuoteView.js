@@ -18,7 +18,9 @@ define([
 
         CC.Views.QuoteView = Backbone.Marionette.ItemView.extend({
 
-            template: "#quote_view_template"
+            template: "#quote_view_template",
+
+            className: "span10 offset1"
 
         });
 });

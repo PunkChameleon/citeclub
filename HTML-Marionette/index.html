@@ -30,7 +30,7 @@
 
         <script id="app_layout_template" type="text/html">
             <header id="header" class="row-fluid"></header>
-            <section id="content"></section>
+            <section id="content" class="row-fluid"></section>
             <footer id="footer"></footer>
         </script>
 
@@ -62,8 +62,11 @@
         </script>
 
         <script id="quote_view_template" type="text/html">
-            <h2>From the article on <a href="{{articleLink}}" target="_blank">{{articleTitle}}</a>...</h2>
-            <article id="quote"><p>{{articleContent}}</p></article>
+            
+            <article id="quote" class="row-fluid">
+                <h2>From the article on <a href="{{articleLink}}" target="_blank">{{articleTitle}}</a>...</h2>
+                <p>{{{articleContent}}}</p>
+            </article>
         </script>
 
         <script id="content_layout_template" type="text/html">
