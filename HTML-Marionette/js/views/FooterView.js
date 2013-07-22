@@ -18,7 +18,9 @@ define([
 
         CC.Views.FooterView = Backbone.Marionette.ItemView.extend({
 
-            template: "#footer_view_template"
+            template: "#footer_view_template",
+
+            className: "footer_container span10 offset1 text-center"
 
         });
 });

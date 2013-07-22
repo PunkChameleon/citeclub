@@ -28,10 +28,11 @@
         <!-- Add your site or application content here -->
         <div id="wrapper"></div>
 
+        <!-- Begin Templates -->
         <script id="app_layout_template" type="text/html">
             <header id="header" class="row-fluid"></header>
             <section id="content" class="row-fluid"></section>
-            <footer id="footer"></footer>
+            <footer id="footer" class="row-fluid"></footer>
         </script>
 
         <script id="header_layout_template" type="text/html">
@@ -41,7 +42,7 @@
             </div>
 
             <div class="login_area span6">
-                    <div id="please_login">
+                    <div class="please_login">
                         Please <a href="#" id="showLogin">log in</a> or <a target="_blank" href="http://test.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page&type=signup">create an account</a> to start citing! 
                     </div>
                     <!--<div id="login_info">
@@ -62,7 +63,6 @@
         </script>
 
         <script id="quote_view_template" type="text/html">
-            
             <article id="quote" class="row-fluid">
                 <h2>From the article on <a href="{{articleLink}}" target="_blank">{{articleTitle}}</a>...</h2>
                 <p>{{{articleContent}}}</p>
@@ -71,7 +71,7 @@
 
         <script id="content_layout_template" type="text/html">
             <article id="quoting_area"></article>
-            <article id="form_region"></article>
+            <article id="buttons_forms_region"></article>
 
                 <section id="play_area"><!-- Start Play Area -->
                     <article id="cite_or_skip">

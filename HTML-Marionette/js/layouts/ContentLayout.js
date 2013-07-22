@@ -24,7 +24,7 @@ define([
 
             regions: {
                 quote: "#quoting_area",
-                form : "#form_region"
+                buttonsForms : "#buttons_forms_region"
             },
 
             onRender : function() {
