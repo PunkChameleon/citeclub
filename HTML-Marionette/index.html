@@ -69,23 +69,27 @@
             </article>
         </script>
 
+        <script id="cite_it_skip_it_view_template" type="text/html">
+            <input type="submit" class="button" id="citeIt" value="cite it!">
+            <label>or</label>
+            <input type="submit" class="button" id="skipIt" value="skip it!">
+        </script>
+
+        <script id="cite_options_view_template" type="text/html">
+            <label>What type of source are you using?</label><br>
+            <button type="submit" class="button" id="web">Web</button>
+            <button type="submit" class="button" id="news">News</button>
+            <button type="submit" class="button" id="book">Book</button>
+            <button type="submit" class="button" id="journal">Journal</button>
+        </script>
+
         <script id="content_layout_template" type="text/html">
             <article id="quoting_area"></article>
             <article id="buttons_forms_region"></article>
 
                 <section id="play_area"><!-- Start Play Area -->
-                    <article id="cite_or_skip">
-                        <input type="submit" class="button" id="citeIt" value="cite it!">
-                        <label>or</label>
-                        <input type="submit" class="button" id="skipIt" value="skip it!">
-                    </article>
-                    <article id="cite_buttons" style="display: none;">
-                        <label>What type of source are you using?</label><br>
-                        <input type="submit" class="button" id="web" value="Web">
-                        <input type="submit" class="button" id="news" value="News">
-                        <input type="submit" class="button" id="book" value="Book">
-                        <input type="submit" class="button" id="journal" value="Journal">
-                    </article>
+                    
+                    
                     <article id="forms">
                         <form id="web" method="POST" action="/action/edit.php">
                             <div class="form_holder">

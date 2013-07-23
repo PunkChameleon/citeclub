@@ -1,6 +1,6 @@
 /*
  *
- * Author     : nweingartner
+ * Author     : streetlight
  * Date       : 7/20/2013
  * Description: Article Model
  *

@@ -57,6 +57,8 @@ body {
 
 header {
     height:70px;
+    border-bottom:3px dotted @primary;
+    padding-bottom: 50px;
     
     .logo {
         text-align:left;
@@ -169,42 +171,41 @@ header {
     }
                     
     #quote {
-            width:92%;
-            margin:0 auto;
-            font-size:25px;
-            text-align:justify;
-            
-            span {
-                font-weight:bold;
-                font-size:35px;
-                margin:7px 0;
-                font-size:25px; 
-            }
-
-            sup {
-                font-size:22px;
-                top:-.2em;
-                padding:0 2px 0 15px;
-            }
-
-            .Template-Fact {
-                font-weight:bold;
-            }
-            
-                
+        width:92%;
+        margin:0 auto;
+        font-size:25px;
+        text-align:justify;
+        
+        span {
+            font-weight:bold;
+            font-size:35px;
+            margin:7px 0;
+            font-size:25px; 
         }
+
+        sup {
+            font-size:22px;
+            top:-.2em;
+            padding:0 2px 0 15px;
+        }
+
+        .Template-Fact {
+            font-weight:bold;
+        }
+        
+                
+    }
         
 }
 
-#play_area {
+#buttons_forms_region {
     
     height:100%;
     clear:both;
 
-    article {
+    .cite_or_skip  {
         padding:30px 0;
-        margin:0 auto;
-        
+
         .button {
             width:330px;
             height:75px;
@@ -222,27 +223,29 @@ header {
         
     }
         
-    #cite_buttons {
-        width:98%;
+    .cite_buttons {
 
         label {
             margin-left:0;
         }
 
-        #web, #book {
-            margin-right:270px;
+        .button {
+            min-width:50px;
+            height:25px;
+            font-size:25px;
+            border-radius:50px;
         }
+        
     }
     
 }
 
 #forms {
+
     form {
         display:none;
         width: 870px;
         margin:0 133px;
-        min-height:400px;
-
     
         label{
             display: inline-block;
@@ -288,6 +291,7 @@ header {
 
 footer {
     border-top:3px dotted @primary;
+    padding-top:10px;
 
     ul {
         margin: 0 auto;

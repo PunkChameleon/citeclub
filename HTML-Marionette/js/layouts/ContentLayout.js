@@ -1,6 +1,6 @@
 /*
  *
- * Author     : nweingartner
+ * Author     : streetlight
  * Date       : 7/20/2013
  * Description: Content Layout
  *
@@ -12,6 +12,7 @@ define([
     "backbone",
     "marionette",
     "views/QuoteView",
+    "views/CiteItSkipItView",
     "models/ArticleModel"
     ],
     function(Common, Backbone, Marionette) {
@@ -29,13 +30,18 @@ define([
 
             onRender : function() {
 
+                var articleModel = new CC.Models.ArticleModel();
+
                 //Show Quote Region
                 this.quote.show(new CC.Views.QuoteView({
-                    model: new CC.Models.ArticleModel()
+                    model: articleModel
                 }));
 
                 //Show Form Region
-                //this.form.show();
+                this.buttonsForms.show(new CC.Views.CiteItSkipItView({
+                    model: articleModel,
+                    contentLayout : this
+                }));
             }
 
         });
