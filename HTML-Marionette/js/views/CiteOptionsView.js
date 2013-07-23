@@ -20,7 +20,30 @@ define([
 
             template: "#cite_options_view_template",
 
-            className: "cite_options span10 offset1 text-center"
+            className: "cite_options span10 offset1 text-center",
+
+            events: {
+                "click #web" : "webCite",
+                "click #news" : "newsCite",
+                "click #book" : "bookCite",
+                "click #journal" : "journalCite"
+            }
+
+            webCite : function() {
+
+            },
+
+            newsCite :function() {
+
+            },
+
+            bookCite : function() {
+
+            },
+
+            journalCite : function() {
+                
+            }
 
         });
 });
