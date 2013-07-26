@@ -22,7 +22,8 @@ define([
             controller : new CC.Controllers.GlobalController(),
 
             appRoutes: {
-                "": "main"
+                "": "main",
+                "about" : "about"
             }
 
         });

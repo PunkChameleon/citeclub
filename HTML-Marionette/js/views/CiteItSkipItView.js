@@ -13,7 +13,7 @@ define([
     "marionette",
     "views/CiteOptionsView"
     ],
-    function(Common, Backbone, Marionette) {
+    function(Common, Backbone) {
 
         var CC = Common.CC || {};
 
@@ -31,7 +31,10 @@ define([
             citeIt : function() {
                 var contentLayout = this.options.contentLayout;
 
-                contentLayout.buttonsForms.show(new CC.Views.CiteOptionsView());
+                contentLayout.buttonsForms.show(new CC.Views.CiteOptionsView({
+                    model: this.model,
+                    contentLayout: this.options.contentLayout
+                }));
 
             },
 

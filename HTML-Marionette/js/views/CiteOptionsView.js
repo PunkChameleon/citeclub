@@ -10,9 +10,13 @@
 define([
     "common",
     "backbone",
-    "marionette"
+    "marionette",
+    "views/WebFormView",
+    "views/NewsFormView",
+    "views/BookFormView",
+    "views/JournalFormView"
     ],
-    function(Common, Backbone, Marionette) {
+    function(Common, Backbone) {
 
         var CC = Common.CC || {};
 
@@ -27,22 +31,38 @@ define([
                 "click #news" : "newsCite",
                 "click #book" : "bookCite",
                 "click #journal" : "journalCite"
-            }
+            },
 
             webCite : function() {
+                var contentLayout = this.options.contentLayout;
 
+                contentLayout.buttonsForms.show(new CC.Views.WebFormView({
+                    articleModel : this.options.articleModel
+                }));
             },
 
             newsCite :function() {
+                var contentLayout = this.options.contentLayout;
 
+                contentLayout.buttonsForms.show(new CC.Views.NewsFormView({
+                    articleModel : this.options.articleModel
+                }));
             },
 
             bookCite : function() {
+                var contentLayout = this.options.contentLayout;
 
+                contentLayout.buttonsForms.show(new CC.Views.BookFormView({
+                    articleModel : this.options.articleModel
+                }));
             },
 
             journalCite : function() {
-                
+                var contentLayout = this.options.contentLayout;
+
+                contentLayout.buttonsForms.show(new CC.Views.JournalFormView({
+                    articleModel : this.options.articleModel
+                }));
             }
 
         });
