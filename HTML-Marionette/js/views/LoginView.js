@@ -30,7 +30,6 @@ define([
             showLogin : function() {
                 var modal = this.options.modal;
 
-                modal.show(new CC.Views.LoginFormView());
             }
 
         });
