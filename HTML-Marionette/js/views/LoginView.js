@@ -11,7 +11,9 @@ define([
     "common",
     "backbone",
     "marionette",
-    "bootstrap"
+    "bootstrap",
+    "views/LoginModalView",
+    "models/LoginModel"
     ],
     function(Common, Backbone) {
 
@@ -28,9 +30,16 @@ define([
             },
 
             showLogin : function() {
-                var modal = this.options.modal;
+
+                var loginModal = new CC.Views.LoginModalView({
+                    model : new CC.Models.LoginModel()
+                });
+
+                this.options.modal.show(loginModal);
+
+                loginModal.$el.modal();
 
             }
-
+ 
         });
 });

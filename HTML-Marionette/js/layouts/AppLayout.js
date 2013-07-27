@@ -25,7 +25,8 @@ define([
             regions: {
                 header: "#header",
                 content: "#content",
-                footer : "#footer"
+                footer : "#footer",
+                modal: "#modal"
             }
 
         });
