@@ -42,7 +42,8 @@ define([
 
                 contentLayout.buttonsForms.show(new CC.Views.FormView({
                     articleModel : this.options.articleModel,
-                    type: this.type.web
+                    type: this.type.web,
+                    contentLayout: this.options.contentLayout
                 }));
             },
 
@@ -51,7 +52,8 @@ define([
 
                 contentLayout.buttonsForms.show(new CC.Views.FormView({
                     articleModel : this.options.articleModel,
-                    type: this.type.news
+                    type: this.type.news,
+                    contentLayout: this.options.contentLayout
                 }));
             },
 
@@ -60,7 +62,8 @@ define([
 
                 contentLayout.buttonsForms.show(new CC.Views.FormView({
                     articleModel : this.options.articleModel,
-                    type: this.type.book
+                    type: this.type.book,
+                    contentLayout: this.options.contentLayout
                 }));
             },
 
@@ -69,7 +72,8 @@ define([
 
                 contentLayout.buttonsForms.show(new CC.Views.FormView({
                     articleModel : this.options.articleModel,
-                    type: this.type.journal
+                    type: this.type.journal,
+                    contentLayout: this.options.contentLayout
                 }));
             }
 

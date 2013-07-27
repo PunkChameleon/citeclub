@@ -47,7 +47,7 @@ define([
             },
 
             goBack : function() {
-                
+                //Go Back Functionality should go here!
             }
 
         });
