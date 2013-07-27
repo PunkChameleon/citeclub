@@ -11,10 +11,7 @@ define([
     "common",
     "backbone",
     "marionette",
-    "views/WebFormView",
-    "views/NewsFormView",
-    "views/BookFormView",
-    "views/JournalFormView"
+    "views/FormView"
     ],
     function(Common, Backbone) {
 
@@ -33,35 +30,46 @@ define([
                 "click #journal" : "journalCite"
             },
 
+            type : {
+                "web" : "web",
+                "news" : "news",
+                "book" : "book",
+                "journal" : "journal"
+            },
+
             webCite : function() {
                 var contentLayout = this.options.contentLayout;
 
-                contentLayout.buttonsForms.show(new CC.Views.WebFormView({
-                    articleModel : this.options.articleModel
+                contentLayout.buttonsForms.show(new CC.Views.FormView({
+                    articleModel : this.options.articleModel,
+                    type: this.type.web
                 }));
             },
 
             newsCite :function() {
                 var contentLayout = this.options.contentLayout;
 
-                contentLayout.buttonsForms.show(new CC.Views.NewsFormView({
-                    articleModel : this.options.articleModel
+                contentLayout.buttonsForms.show(new CC.Views.FormView({
+                    articleModel : this.options.articleModel,
+                    type: this.type.news
                 }));
             },
 
             bookCite : function() {
                 var contentLayout = this.options.contentLayout;
 
-                contentLayout.buttonsForms.show(new CC.Views.BookFormView({
-                    articleModel : this.options.articleModel
+                contentLayout.buttonsForms.show(new CC.Views.FormView({
+                    articleModel : this.options.articleModel,
+                    type: this.type.book
                 }));
             },
 
             journalCite : function() {
                 var contentLayout = this.options.contentLayout;
 
-                contentLayout.buttonsForms.show(new CC.Views.JournalFormView({
-                    articleModel : this.options.articleModel
+                contentLayout.buttonsForms.show(new CC.Views.FormView({
+                    articleModel : this.options.articleModel,
+                    type: this.type.journal
                 }));
             }
 

@@ -27,10 +27,9 @@ define([
                     },
                     success: function(data) {
                         console.log(data);
-                        alert('success!')
                     },
                     failure: function(xhr, status, error) {
-                        alert('failure!')
+                        console.log(xhr);
                     }
                 })
             }
