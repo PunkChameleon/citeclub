@@ -10,7 +10,9 @@
 define([
     "common",
     "backbone",
-    "marionette"
+    "marionette",
+    "views/LoginView",
+    "views/SearchBarView"
     ],
     function(Common, Backbone, Marionette) {
 
@@ -23,8 +25,19 @@ define([
             className : "span10 offset1",
 
             regions: {
-                login: "#login",
-                search: "#search"
+                login: "#login_area",
+                search: "#search_area"
+            },
+
+            onRender: function() {
+
+                //Show Login View
+                this.login.show(new CC.Views.LoginView({
+                    modal : this.options.modal
+                }));
+
+                //Show Search View
+                this.search.show(new CC.Views.SearchBarView());
             }
 
         });

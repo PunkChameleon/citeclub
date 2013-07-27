@@ -32,7 +32,9 @@ define([
                 CC.App.applicationWrapper.show(appLayout);
 
                 //Place Header Layout
-                appLayout.header.show(new CC.Layouts.HeaderLayout());
+                appLayout.header.show(new CC.Layouts.HeaderLayout({
+                    modal: appLayout.modal
+                }));
 
                 //Place Content Layout
                 appLayout.content.show(new CC.Layouts.ContentLayout());

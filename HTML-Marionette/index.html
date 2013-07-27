@@ -33,32 +33,47 @@
             <header id="header" class="row-fluid"></header>
             <section id="content" class="row-fluid"></section>
             <footer id="footer" class="row-fluid"></footer>
+            <div id="modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
         </script>
 
         <script id="header_layout_template" type="text/html">
-            
             <div class="logo pull-left span6">
                 <h1>*[cite] <span>club</span></h1>
             </div>
 
-            <div class="login_area span6">
-                    <div class="please_login">
-                        Please <a href="#" id="showLogin">log in</a> or <a target="_blank" href="http://test.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page&type=signup">create an account</a> to start citing! 
-                    </div>
-                    <!--<div id="login_info">
-                        <form method="POST" id="login" action="/action/login.php">
-                            <label>Username: </label><input type="text" id="username" name="username">
-                            <label>Password:</label> <input type="password" id="password" name="password">
-                            <input type="submit" value="Go">
-                        </form>
-                    </div>-->
-                <div class="search_area">
-                    <input type="text"  id="keywords" class="filter" placeholder="Search for Something to Cite Specifically...">
-                    <button class="button" id="newPage" value="Search">Search</button>
-                    <span>Or...</span>
-                    <button class="button" id="dice" value="Roll the Dice">Roll the Dice</button>
-                </div>
+            <div class="login_search text-right span6">
+                <div id="login_area"></div>
+                <div id="search_area"></div>
             </form>
+            </div>
+        </script>
+
+        <script id="login_view_template" type="text/html">
+             Please <a class="show_login">log in</a> or <a target="_blank" href="http://test.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page&type=signup">create an account</a> to start citing!
+        </script>
+
+        <script id="search_bar_view_template" type="text/html">
+            <input type="text" class="keywords filter" placeholder="Search for Something to Cite Specifically...">
+            <button class="button newPage">Search</button>
+            <span>Or...</span>
+            <button class="button dice">Roll the Dice</button>
+        </script>
+
+        <script id="login_modal_view_template" type="text/html">
+            <div class="modal hide fade">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>Log In</h3>
+                    </div>
+                    <div class="modal-body login-info">
+                        <label>Username: </label><input type="text" id="username" name="username">
+                        <label>Password:</label> <input type="password" id="password" name="password">
+                        <input type="submit" value="Go">
+                    </div>
+                    <div class="modal-footer">
+                    <a href="#" class="btn">Close</a>
+                    <a href="#" class="btn btn-primary">Save changes</a>
+                </div>
             </div>
         </script>
 
@@ -86,21 +101,6 @@
         <script id="content_layout_template" type="text/html">
             <article id="quoting_area"></article>
             <article id="buttons_forms_region"></article>
-
-                <section id="play_area"><!-- Start Play Area -->
-                    
-                    
-                    <article id="forms" class="hidden">
-                        
-                        <form id="book" method="POST" action="/action/edit.php">
-                            
-                        </form>
-                        <form id="journal" method="POST" action="/action/edit.php">
-
-                            
-                        </form>
-                </article>
-                </section><!-- End Play Area -->
         </script>
 
         <script id="web_form_view_template" type="text/html">
