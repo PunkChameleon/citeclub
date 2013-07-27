@@ -3,13 +3,19 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Nick Weingartner -- @streetlight_new
+    Peter Caisse -- ???
+    Chris Niese -- ???
 
 # THANKS
 
-    <name>
-
+    Dev Nuts
+    Code for America
+    Bear
+    
 # TECHNOLOGY COLOPHON
 
     HTML5, CSS3
-    jQuery, Modernizr
+    jQuery, Modernizr,
+    Backbone, Marionette,
+    RequireJS
