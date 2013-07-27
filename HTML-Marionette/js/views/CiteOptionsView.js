@@ -43,8 +43,7 @@ define([
                 contentLayout.buttonsForms.show(new CC.Views.FormView({
                     articleModel : this.options.articleModel,
                     type: this.type.web,
-                    contentLayout: this.options.contentLayout,
-                    citeOptions: this
+                    contentLayout: this.options.contentLayout
                 }));
             },
 
