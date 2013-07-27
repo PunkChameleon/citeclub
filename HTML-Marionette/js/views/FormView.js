@@ -10,7 +10,8 @@
 define([
     "common",
     "backbone",
-    "marionette"
+    "marionette",
+    "views/CiteOptionsView"
     ],
     function(Common, Backbone) {
 
@@ -47,7 +48,14 @@ define([
             },
 
             goBack : function() {
+                
+                var contentLayout = this.options.contentLayout;
+
                 //Go Back Functionality should go here!
+                contentLayout.buttonsForms.show(new CC.Views.CiteOptionsView({
+                    model: this.model,
+                    contentLayout: contentLayout
+                }));
             }
 
         });

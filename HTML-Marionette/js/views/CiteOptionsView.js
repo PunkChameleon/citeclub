@@ -43,7 +43,8 @@ define([
                 contentLayout.buttonsForms.show(new CC.Views.FormView({
                     articleModel : this.options.articleModel,
                     type: this.type.web,
-                    contentLayout: this.options.contentLayout
+                    contentLayout: this.options.contentLayout,
+                    citeOptions: this
                 }));
             },
 
@@ -53,7 +54,8 @@ define([
                 contentLayout.buttonsForms.show(new CC.Views.FormView({
                     articleModel : this.options.articleModel,
                     type: this.type.news,
-                    contentLayout: this.options.contentLayout
+                    contentLayout: this.options.contentLayout,
+                    citeOptions: this
                 }));
             },
 
@@ -63,7 +65,8 @@ define([
                 contentLayout.buttonsForms.show(new CC.Views.FormView({
                     articleModel : this.options.articleModel,
                     type: this.type.book,
-                    contentLayout: this.options.contentLayout
+                    contentLayout: this.options.contentLayout,
+                    citeOptions: this
                 }));
             },
 
@@ -73,7 +76,8 @@ define([
                 contentLayout.buttonsForms.show(new CC.Views.FormView({
                     articleModel : this.options.articleModel,
                     type: this.type.journal,
-                    contentLayout: this.options.contentLayout
+                    contentLayout: this.options.contentLayout,
+                    citeOptions: this
                 }));
             }
 
