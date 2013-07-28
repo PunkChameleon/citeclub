@@ -8,11 +8,12 @@
 
 
 define([
-    "common",
-    "backbone",
-    "marionette"
+        "common",
+        "backbone",
+        "marionette"
     ],
-    function(Common, Backbone) {
+
+    function (Common, Backbone) {
 
         var CC = Common.CC || {};
 
@@ -22,14 +23,14 @@ define([
 
             className: "login_modal modal hide fade",
 
-            events : {
-                "click .btn-login" : "login"
+            events: {
+                "click .btn-login": "login"
             },
 
-            login : function() {
+            login: function () {
                 //Login into the application!
                 this.model.login(this.$el.find("#username").val(), this.$el.find('#password').val());
             }
 
         });
-});
+    });

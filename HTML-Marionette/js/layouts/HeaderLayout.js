@@ -8,13 +8,13 @@
 
 
 define([
-    "common",
-    "backbone",
-    "marionette",
-    "views/LoginView",
-    "views/SearchBarView"
+        "common",
+        "backbone",
+        "marionette",
+        "views/LoginView",
+        "views/SearchBarView"
     ],
-    function(Common, Backbone, Marionette) {
+    function (Common, Backbone, Marionette) {
 
         var CC = Common.CC || {};
 
@@ -22,18 +22,18 @@ define([
 
             template: "#header_layout_template",
 
-            className : "span10 offset1",
+            className: "span10 offset1",
 
             regions: {
                 login: "#login_area",
                 search: "#search_area"
             },
 
-            onRender: function() {
+            onRender: function () {
 
                 //Show Login View
                 this.login.show(new CC.Views.LoginView({
-                    modal : this.options.modal
+                    modal: this.options.modal
                 }));
 
                 //Show Search View
@@ -41,4 +41,4 @@ define([
             }
 
         });
-});
+    });

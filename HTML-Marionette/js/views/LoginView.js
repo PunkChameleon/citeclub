@@ -15,7 +15,8 @@ define([
     "views/LoginModalView",
     "models/LoginModel"
     ],
-    function(Common, Backbone) {
+
+    function (Common, Backbone) {
 
         var CC = Common.CC || {};
 
@@ -25,14 +26,14 @@ define([
 
             className: "login_text",
 
-            events : {
-                "click .show_login" : "showLogin"
+            events: {
+                "click .show_login": "showLogin"
             },
 
-            showLogin : function() {
+            showLogin: function () {
 
                 var loginModal = new CC.Views.LoginModalView({
-                    model : new CC.Models.LoginModel()
+                    model: new CC.Models.LoginModel()
                 });
 
                 this.options.modal.show(loginModal);
@@ -40,6 +41,6 @@ define([
                 loginModal.$el.modal();
 
             }
- 
+
         });
 });

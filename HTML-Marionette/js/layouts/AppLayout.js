@@ -8,11 +8,11 @@
 
 
 define([
-    "common",
-    "backbone",
-    "marionette"
+        "common",
+        "backbone",
+        "marionette"
     ],
-    function(Common, Backbone, Marionette) {
+    function (Common, Backbone, Marionette) {
 
         var CC = Common.CC || {};
 
@@ -20,14 +20,14 @@ define([
 
             template: "#app_layout_template",
 
-            className : "main_container",
+            className: "main_container",
 
             regions: {
                 header: "#header",
                 content: "#content",
-                footer : "#footer",
+                footer: "#footer",
                 modal: "#modal"
             }
 
         });
-});
+    });
