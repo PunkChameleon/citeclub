@@ -5,4 +5,7 @@ Cite Club is a web application that scours Wikipedia for entries that need citat
 
 It is currently in active developement. Running it locally is not advised, but if you choose to go ahead and do it, use Firefox, as Cite Club utilizes LESS and it will not compile locally in Chrome.
 
+This project lead to the birth of of a [PHP wrapper for Mediawiki](https://github.com/pcaisse/mediawiki).
+
+Until then,
 Cite the power.
