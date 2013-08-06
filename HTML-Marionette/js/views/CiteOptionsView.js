@@ -8,12 +8,13 @@
 
 
 define([
-    "common",
-    "backbone",
-    "marionette",
-    "views/FormView"
+        "common",
+        "backbone",
+        "marionette",
+        "views/FormView",
+        "views/CiteItSkipItView"
     ],
-    function(Common, Backbone) {
+    function (Common, Backbone) {
 
         var CC = Common.CC || {};
 
@@ -24,61 +25,72 @@ define([
             className: "cite_options span10 offset1 text-center",
 
             events: {
-                "click #web" : "webCite",
-                "click #news" : "newsCite",
-                "click #book" : "bookCite",
-                "click #journal" : "journalCite"
+                "click #web": "webCite",
+                "click #news": "newsCite",
+                "click #book": "bookCite",
+                "click #journal": "journalCite",
+                "click .back": "goBack"
             },
 
-            type : {
-                "web" : "web",
-                "news" : "news",
-                "book" : "book",
-                "journal" : "journal"
+            type: {
+                "web": "web",
+                "news": "news",
+                "book": "book",
+                "journal": "journal"
             },
 
-            webCite : function() {
+            webCite: function () {
                 var contentLayout = this.options.contentLayout;
 
                 contentLayout.buttonsForms.show(new CC.Views.FormView({
-                    articleModel : this.options.articleModel,
+                    articleModel: this.options.articleModel,
                     type: this.type.web,
                     contentLayout: this.options.contentLayout
                 }));
             },
 
-            newsCite :function() {
+            newsCite: function () {
                 var contentLayout = this.options.contentLayout;
 
                 contentLayout.buttonsForms.show(new CC.Views.FormView({
-                    articleModel : this.options.articleModel,
+                    articleModel: this.options.articleModel,
                     type: this.type.news,
                     contentLayout: this.options.contentLayout,
                     citeOptions: this
                 }));
             },
 
-            bookCite : function() {
+            bookCite: function () {
                 var contentLayout = this.options.contentLayout;
 
                 contentLayout.buttonsForms.show(new CC.Views.FormView({
-                    articleModel : this.options.articleModel,
+                    articleModel: this.options.articleModel,
                     type: this.type.book,
                     contentLayout: this.options.contentLayout,
                     citeOptions: this
                 }));
             },
 
-            journalCite : function() {
+            journalCite: function () {
                 var contentLayout = this.options.contentLayout;
 
                 contentLayout.buttonsForms.show(new CC.Views.FormView({
-                    articleModel : this.options.articleModel,
+                    articleModel: this.options.articleModel,
                     type: this.type.journal,
                     contentLayout: this.options.contentLayout,
                     citeOptions: this
                 }));
+            },
+
+            goBack: function () {
+
+                var contentLayout = this.options.contentLayout;
+
+                contentLayout.buttonsForms.show(new CC.Views.CiteItSkipItView({
+                    model: this.model,
+                    contentLayout: contentLayout
+                }));
             }
 
         });
-});
+    });
