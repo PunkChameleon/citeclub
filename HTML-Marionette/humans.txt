@@ -3,9 +3,9 @@
 
 # TEAM
 
-    Nick Weingartner -- @streetlight_new
-    Peter Caisse -- ???
-    Chris Niese -- ???
+    Nick Weingartner --  nweingartner@gmail.com -- @streetlight_nw
+    Peter Caisse -- pcaisse@gmail.com
+    Chris Niese -- christophernies@gmail.com -- @christophernies
 
 # THANKS
 
