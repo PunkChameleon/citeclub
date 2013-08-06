@@ -8,12 +8,12 @@
 
 
 define([
-    "common",
-    "backbone",
-    "marionette",
-    "views/CiteOptionsView"
+        "common",
+        "backbone",
+        "marionette",
+        "views/CiteOptionsView"
     ],
-    function(Common, Backbone) {
+    function (Common, Backbone) {
 
         var CC = Common.CC || {};
 
@@ -23,12 +23,12 @@ define([
 
             className: "cite_or_skip span10 offset1 text-center",
 
-            events : {
-                "click #citeIt" : "citeIt",
-                "click #skipIt" : "skipIt"
+            events: {
+                "click #citeIt": "citeIt",
+                "click #skipIt": "skipIt"
             },
 
-            citeIt : function() {
+            citeIt: function () {
                 var contentLayout = this.options.contentLayout;
 
                 contentLayout.buttonsForms.show(new CC.Views.CiteOptionsView({
@@ -38,10 +38,10 @@ define([
 
             },
 
-            skipIt : function() {
+            skipIt: function () {
                 var contentLayout = this.options.contentLayout;
 
             }
 
         });
-});
+    });
