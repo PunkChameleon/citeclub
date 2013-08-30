@@ -25,7 +25,7 @@ define([
 
                 $.ajax({
                     type: "POST",
-                    url: "/citeclub/public/php/ajax/login.php",
+                    url: CC.config.PATH_TO_ACTION + "login.php",
                     data: { 
                         username: username, 
                         password: password
