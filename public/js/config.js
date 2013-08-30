@@ -16,7 +16,9 @@ requirejs.config({
         backbone: 'vendor/backbone.min',
         marionette: 'vendor/backbone.marionette.min',
         mustache: 'vendor/mustache.min',
-        bootstrap: 'vendor/bootstrap.min'
+        bootstrap: 'vendor/bootstrap.min',
+        mediawiki: 'classes/MediaWiki',
+        wikitext: 'classes/WikitextProcessor'
     },
 
     shim: {
@@ -37,40 +39,68 @@ requirejs.config({
 
         "bootstrap": {
             deps: ["jquery"]
+        },
+
+        "mediawiki": {
+            deps: ["jquery"]
         }
 
     }
 
 });
 
-define(["common", "jquery", "backbone", "marionette", "mustache", "routers/GlobalRouter"], function (Common, $, Backbone, Marionette, Mustache) {
+define(["common",
+        "jquery",
+        "backbone",
+        "marionette", 
+        "mustache",
+        "mediawiki",
+        "routers/GlobalRouter"],
+    function (Common, $, Backbone, Marionette, Mustache) {
 
-    'use strict';
+        'use strict';
 
-    var CC = Common.CC || {};
+        var CC = Common.CC || {};
 
-    CC.App = new Backbone.Marionette.Application();
+        CC.App = new Backbone.Marionette.Application();
 
-    var mainRouter = new CC.Routers.GlobalRouter();
+        var mainRouter = new CC.Routers.GlobalRouter();
 
-    CC.App.addRegions({
-        "applicationWrapper": "#wrapper"
-    });
+        CC.App.addRegions({
+            "applicationWrapper": "#wrapper"
+        });
 
-    // Configure custom template loading, compiling and rendering
-    CC.App.addInitializer(function (options) {
+        // Configure custom template loading, compiling and rendering
+        CC.App.addInitializer(function (options) {
 
-        Backbone.Marionette.TemplateCache.prototype.compileTemplate = function (rawTemplate) {
-            return Mustache.compile(rawTemplate);
+            Backbone.Marionette.TemplateCache.prototype.compileTemplate = function (rawTemplate) {
+                return Mustache.compile(rawTemplate);
+            };
+
+            Backbone.history.start();
+
+        });
+
+        CC.config = {
+            PATH_TO_ACTION: "/citeclub/public/php/action/" 
         };
 
-        Backbone.history.start();
+        // Make AJAX call to get wikiURL before starting app
+        $.ajax({
+            url: CC.config.PATH_TO_ACTION + 'getWikiURL.php',
+            success: function(wikiURL) {
+                // Configure JS wrapper
+                CC.MediaWiki = MediaWiki(CC.config.PATH_TO_ACTION, wikiURL);
+                // Start the app
+                $(document).ready(function () {
+                    CC.App.start();
+                });
+            },
+            error: function(xhr, error){
+                console.debug(xhr);
+                console.debug(error);
+            }
+        });
 
-    });
-
-    // Start the app
-    $(document).ready(function () {
-        CC.App.start();
-    });
-
-});
+    }
+);
