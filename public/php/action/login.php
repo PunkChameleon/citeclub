@@ -11,20 +11,16 @@ try {
 	$password = $_POST['password'];
 	
 	// login and get login data from test.wikipedia.org
-	$loginXML = MediaWiki::login($username, $password);
+	$login = MediaWiki::login($username, $password);
 	
 	if (!is_null($login)) {
 		// start new session
 		session_start();
-		// save login data for this session
-		foreach ($login as $key => $value) {
-			$_SESSION[$key] = $value;	
-		}
-		// create session var for Wiki URL
-		$_SESSION['wikiURL'] = Wiki::$wikiURL;
+		// save username for this session
+		$_SESSION['username'] = $username;	
 	}
 	
-	echo json_encode($loginXML);
+	echo $login;
 	exit();
 	
 } catch (Exception $e) {

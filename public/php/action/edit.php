@@ -11,9 +11,8 @@ try {
 	$pageId = $_POST['pageId'];
 	$sectionNum = $_POST['section'];
 	
-	$editXML = MediaWiki::edit($pageId, $text, $sectionNum);
+	echo MediaWiki::edit($pageId, $text, $sectionNum);
 
-	echo json_encode($editXML);
 	exit();
 	
 } catch (Exception $e) {

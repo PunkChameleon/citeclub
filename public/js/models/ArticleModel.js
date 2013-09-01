@@ -16,6 +16,28 @@ define([
 
         var CC = Common.CC || {};
 
-        CC.Models.ArticleModel = Backbone.Model.extend();
+        CC.Models.ArticleModel = Backbone.Model.extend({
+
+        	submitCitation: function(newWikitext, successCallback, failureCallback) {
+
+        		/*
+                * Submit new citation for this article
+                * by making edit with new section wikitext
+                */
+
+                $.ajax({
+                    type: "POST",
+                    url: CC.config.PATH_TO_ACTION + "edit.php",
+                    data: { 
+                        pageId: this.get("id"), 
+                        sectionNum: this.get("sectionNum"),
+                        text: newWikitext
+                    },
+                    success: successCallback,
+                    error: failureCallback
+                });
+        	}
+
+        });
 
 });

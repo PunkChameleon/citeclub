@@ -30,17 +30,19 @@ define([
 
             citeIt: function () {
                 var contentLayout = this.options.contentLayout;
-
-                contentLayout.buttonsForms.show(new CC.Views.CiteOptionsView({
-                    model: this.model,
-                    contentLayout: this.options.contentLayout
-                }));
-
+                if (contentLayout && contentLayout.buttonsForms) {
+                    contentLayout.buttonsForms.show(new CC.Views.CiteOptionsView({
+                        model: this.model,
+                        contentLayout: this.options.contentLayout
+                    }));
+                }
             },
 
             skipIt: function () {
                 var contentLayout = this.options.contentLayout;
-
+                if (contentLayout) {
+                    contentLayout.render();
+                }
             }
 
         });

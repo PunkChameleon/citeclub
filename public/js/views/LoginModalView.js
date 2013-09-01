@@ -10,7 +10,8 @@
 define([
         "common",
         "backbone",
-        "marionette"
+        "marionette",
+        "views/LogoutView",
     ],
 
     function (Common, Backbone) {
@@ -28,8 +29,19 @@ define([
             },
 
             login: function () {
-                //Login into the application!
-                this.model.login(this.$el.find("#username").val(), this.$el.find('#password').val());
+
+                var that = this,
+                    username = this.$el.find("#username").val(),
+                    password = this.$el.find('#password').val();
+
+                this.model.login(username, password, function(data) {
+                    // update user
+                    CC.User.set("username", username);
+                    // hide login modal 
+                    that.$el.modal('hide');
+                }, function(xhr) {
+                    console.log("Error logging user in: " + xhr.responseText);
+                });
             }
 
         });

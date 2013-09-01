@@ -32,6 +32,10 @@ class MediaWiki {
 		/*
 		* Edit a page
 		*/
+
+		if (empty($pageId)) {
+			throw new Exception("No page id passed.");
+		}
 		
 		$token = static::_getEditToken($pageId);
 		
@@ -68,6 +72,10 @@ class MediaWiki {
 		/*
 		* Log user in using credentials and return login data
 		*/
+
+		if (empty($user) || empty($pass)) {
+			throw new Exception("No username and/or password passed.");
+		}
 		
 		$token = static::_getLoginToken($user, $pass);
 		return static::_logUserIn($user, $pass, $token);
@@ -82,8 +90,6 @@ class MediaWiki {
 		$url = static::_buildURL(array('action' => 'logout'));
 		return static::_makeHTTPRequest($url);
 	}
-	
-	// internal functions
 	
 	private static function _makeHTTPRequest($url, $post="") {
 
@@ -128,7 +134,7 @@ class MediaWiki {
 		// close session
         curl_close($ch);
         
-        // return XML
+        // return response
         return $response;
 	}
 	

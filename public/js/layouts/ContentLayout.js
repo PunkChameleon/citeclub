@@ -79,6 +79,7 @@ define([
             
                     } else {
                         // couldn't find any pages
+                        console.log("No articles to cite found");
                     }
             
                 });
@@ -91,7 +92,7 @@ define([
                 //Show Form Region
                 this.buttonsForms.show(new CC.Views.CiteItSkipItView({
                     model: articleModel,
-                    contentLayout : this
+                    contentLayout: this
                 }));
             }
 

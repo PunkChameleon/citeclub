@@ -81,20 +81,45 @@ define(["common",
 
         });
 
+        CC.App.vent.on("showMsg", function(title, text){
+            alert(text);
+        });
+
         CC.config = {
-            PATH_TO_ACTION: "/citeclub/public/php/action/" 
+            PATH_TO_ACTION: "/citeclub/public/php/action/",
+            citationTypes: {
+                WEB: "web",
+                NEWS: "news",
+                BOOK: "book",
+                JOURNAL: "journal"
+            }, 
         };
 
         // Make AJAX call to get wikiURL before starting app
         $.ajax({
             url: CC.config.PATH_TO_ACTION + 'getWikiURL.php',
             success: function(wikiURL) {
-                // Configure JS wrapper
-                CC.MediaWiki = MediaWiki(CC.config.PATH_TO_ACTION, wikiURL);
-                // Start the app
-                $(document).ready(function () {
-                    CC.App.start();
-                });
+                // Make another AJAX call to get current user
+                // from session variable
+                $.ajax({
+                    url: CC.config.PATH_TO_ACTION + 'getUser.php',
+                    success: function(username) {
+                        // Set user
+                        CC.User = new CC.Models.UserModel({
+                            username: username
+                        });
+                        // Configure JS wrapper
+                        CC.MediaWiki = MediaWiki(CC.config.PATH_TO_ACTION, wikiURL);
+                        // Start the app
+                        $(document).ready(function () {
+                            CC.App.start();
+                        });
+                    },
+                    error: function(xhr, error){
+                        console.debug(xhr);
+                        console.debug(error);
+                    }
+                });                
             },
             error: function(xhr, error){
                 console.debug(xhr);

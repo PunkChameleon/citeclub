@@ -11,7 +11,8 @@ define([
     "common",
     "backbone",
     "marionette",
-    "views/CiteOptionsView"
+    "views/CiteOptionsView",
+    "wikitext"
     ],
     function(Common, Backbone) {
 
@@ -21,33 +22,27 @@ define([
 
             className: "citation_form span10 offset1 row-fluid",
 
-            type : {
-                "web" : "web",
-                "news" : "news",
-                "book" : "book",
-                "journal" : "journal"
-            },
-
             getTemplate: function() {
 
                 var type = this.options.type;
 
-                if (type === this.type.web) {
+                if (type === CC.config.citationTypes.WEB) {
                     return "#web_form_view_template";
-                } else if (type === this.type.news) {
+                } else if (type === CC.config.citationTypes.NEWS) {
                     return "#news_form_view_template";
-                } else if (type === this.type.book) {
+                } else if (type === CC.config.citationTypes.BOOK) {
                     return "#book_form_view_template";
-                } else if (type === this.type.journal) {
+                } else if (type === CC.config.citationTypes.JOURNAL) {
                     return "#journal_form_view_template";
                 }
             },
 
             events: {
-                "click .back" : "goBack"
+                "click .back": "goBack",
+                "click .cite_button": "submit"
             },
 
-            goBack : function() {
+            goBack: function() {
                 
                 var contentLayout = this.options.contentLayout;
 
@@ -56,6 +51,50 @@ define([
                     model: this.model,
                     contentLayout: contentLayout
                 }));
+            },
+
+            submit: function() {
+                
+                // create hashmap used to build citation wikitext (<ref>) from form data
+                var citationData = {},
+                    fields = {};
+
+                citationData.type = this.options.type;
+
+                this.$el.find('input:text').each(function() {
+                    var id = $(this).attr('id'), // text input id should correspond to citation attribute name
+                        value = $(this).val();
+                    if (value !== "")
+                        fields[id] = value;
+                });
+
+                citationData.fields = fields;
+                
+                // get citation wikitext
+                var oldSectionText = this.model.get("sectionText"),
+                    citationWikitext = WikitextProcessor.buildCitationWikitext(citationData),
+                    newSectionWikitext = WikitextProcessor.citedSectionWikitext(oldSectionText, citationWikitext);
+                
+                if (newSectionWikitext) {
+                    this.model.submitCitation(newSectionWikitext, function() {
+                        
+                        /*var msgModel = new Backbone.Model.extend({
+                                title: "Congrats!",
+                                text: "Article cited successfully!"
+                            }),
+                            msgModalView = new CC.Views.MessageModalView({
+                                model: msgModel
+                            });
+
+                        this.options.modal.show(msgModalView);
+                        msgModalView.$el.modal();*/
+
+                        CC.App.vent.trigger("showMsg", "Article cited successfully!");
+
+                    }, function(xhr) {
+                        console.log("Error: " + xhr.responseText);
+                    });
+                }
             }
 
         });
