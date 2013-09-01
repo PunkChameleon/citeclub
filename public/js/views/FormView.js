@@ -77,19 +77,8 @@ define([
                 
                 if (newSectionWikitext) {
                     this.model.submitCitation(newSectionWikitext, function() {
-                        
-                        /*var msgModel = new Backbone.Model.extend({
-                                title: "Congrats!",
-                                text: "Article cited successfully!"
-                            }),
-                            msgModalView = new CC.Views.MessageModalView({
-                                model: msgModel
-                            });
 
-                        this.options.modal.show(msgModalView);
-                        msgModalView.$el.modal();*/
-
-                        CC.App.vent.trigger("showMsg", "Article cited successfully!");
+                        CC.App.vent.trigger("showMsg", "Congrats!", "Article cited successfully!");
 
                     }, function(xhr) {
                         console.log("Error: " + xhr.responseText);

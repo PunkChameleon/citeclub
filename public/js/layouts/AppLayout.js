@@ -10,7 +10,8 @@
 define([
         "common",
         "backbone",
-        "marionette"
+        "marionette",
+        "views/MessageModalView"
     ],
     function (Common, Backbone, Marionette) {
 

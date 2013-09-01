@@ -17,7 +17,7 @@ define([
 
         var CC = Common.CC || {};
 
-        CC.Views.LoginModalView = Backbone.Marionette.ItemView.extend({
+        CC.Views.MessageModalView = Backbone.Marionette.ItemView.extend({
 
             template: "#message_modal_view_template",
 

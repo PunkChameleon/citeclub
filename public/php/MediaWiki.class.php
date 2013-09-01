@@ -27,7 +27,7 @@ class MediaWiki {
 		return static::_makeHTTPRequest($url);
 	}
 		
-	public static function edit($pageId, $text, $summary, $sectionNum, $captchaId, $captchaWord) {
+	public static function edit($pageId, $sectionNum, $text, $summary, $captchaId, $captchaWord) {
 		
 		/*
 		* Edit a page

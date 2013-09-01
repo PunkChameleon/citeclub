@@ -27,6 +27,48 @@
 			
 		    return Math.floor(Math.random() * (max - min + 1)) + min;
 		}
+
+		function citationNeededPagesByKeyword(keywords, foundPages) {
+				
+			/*
+			* Return [citation needed] pages based on keywords passed
+			*/
+			
+			var params = {
+				'action': 'query',
+				'generator': 'search',
+				'gsrsearch': keywords, 
+				'prop': 'categories',
+				'clcategories': 'Category:All articles with unsourced statements'
+			};
+			
+			// example URL: http://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=dog&format=json&prop=categories
+						
+			$.ajax({
+				dataType: 'json',
+				url: actionURL + 'get.php',
+				data: params,
+				success: function(data) {
+					var pages = []; // array to hold page data
+					if (data.query && data.query.pages) {
+						var obj = data.query.pages;
+						for (var prop in obj) {
+							if (obj.hasOwnProperty(prop)) {
+								var categories = obj[prop].categories;
+								if (categories) {
+									pages.push({'id':obj[prop].pageid, 'title':obj[prop].title});
+								}
+							}
+						}
+					}
+					foundPages(pages);
+				},
+				error: function(xhr, error){
+					console.debug(xhr);
+					console.debug(error);
+				}
+			});
+		}
 		
 		function randomCitationNeededPages(foundPages) {
 			
@@ -44,8 +86,7 @@
 				'cmlimit': 500,
 				'cmsort': 'timestamp',
 				'cmstart': randomISODate,
-				'cmprop': 'ids|title',
-				'format': 'xml'					
+				'cmprop': 'ids|title'				
 			};
 			
 			// example URL: http://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmpageid=9329647&cmlimit=500&cmsort=timestamp&cmstart=2007-11-02T12:51:15Z&cmprop=ids|title|timestamp
@@ -100,8 +141,7 @@
 						
 				var params = {
 					'action': 'parse', 
-					'pageid': pageId, 
-					'format': 'xml'
+					'pageid': pageId
 				};
 				
 				// example: http://en.wikipedia.org/w/api.php?action=parse&pageid=736&format=json
@@ -136,8 +176,7 @@
 					'action': 'query',
 					'pageids': pageIdsStr,
 					'prop': 'revisions',
-					'rvprop': 'content',
-					'format': 'xml'					
+					'rvprop': 'content'				
 				};
 				
 				// example: http://en.wikipedia.org/w/api.php?format=jsonfm&action=query&pageids=736|4453&prop=revisions&rvprop=content
@@ -170,49 +209,6 @@
 					}
 				});
 			},	
-					
-			citationNeededPagesByKeyword: function(keywords, foundPages) {
-				
-				/*
-				* Return [citation needed] pages based on keywords passed
-				*/
-				
-				var params = {
-					'action': 'query',
-					'generator': 'search',
-					'gsrsearch': keywords, 
-					'format': 'xml',
-					'prop': 'categories',
-					'clcategories': 'Category:All articles with unsourced statements'
-				};
-				
-				// example URL: http://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=dog&format=json&prop=categories
-							
-				$.ajax({
-					dataType: 'json',
-					url: actionURL,
-					data: params,
-					success: function(data) {
-						var pages = []; // array to hold page data
-						if (data.query && data.query.pages) {
-							var obj = data.query.pages;
-							for (var prop in obj) {
-								if (obj.hasOwnProperty(prop)) {
-									var categories = obj[prop].categories;
-									if (categories) {
-										pages.push({'id':obj[prop].pageid, 'title':obj[prop].title});
-									}
-								}
-							}
-						}
-						foundPages(pages);
-					},
-					error: function(xhr, error){
-						console.debug(xhr);
-						console.debug(error);
-					}
-				});
-			},
 			
 			urlFromPageId: function(pageId) {
 			

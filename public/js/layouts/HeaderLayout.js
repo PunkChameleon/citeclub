@@ -54,7 +54,9 @@ define([
                 this.login.show(view);
 
                 //Show Search View
-                this.search.show(new CC.Views.SearchBarView());
+                this.search.show(new CC.Views.SearchBarView({
+                    contentLayout: this.options.contentLayout
+                }));
             }
 
         });

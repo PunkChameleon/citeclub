@@ -81,10 +81,6 @@ define(["common",
 
         });
 
-        CC.App.vent.on("showMsg", function(title, text){
-            alert(text);
-        });
-
         CC.config = {
             PATH_TO_ACTION: "/citeclub/public/php/action/",
             citationTypes: {
