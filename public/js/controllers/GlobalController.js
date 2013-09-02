@@ -39,13 +39,10 @@ define([
                     contentLayout: contentLayout
                 }));
 
-                CC.App.vent.on("showMsg", function(title, text){
+                CC.App.vent.on("showMsg", function(data){
                     var msgModel = Backbone.Model.extend(),
                         msgModalView = new CC.Views.MessageModalView({
-                            model: new msgModel({
-                                title: title,
-                                text: text
-                            }) 
+                            model: new msgModel(data) 
                         });
 
                     appLayout.modal.show(msgModalView);

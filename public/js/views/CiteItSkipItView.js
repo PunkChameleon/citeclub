@@ -28,6 +28,18 @@ define([
                 "click #skipIt": "skipIt"
             },
 
+            initialize: function() {
+                this.listenTo(this.model, 'change', this.render);
+            },
+
+            onBeforeRender: function() {
+                if (!this.model.get("allDataRetrieved")) {
+                    this.$el.hide();
+                } else {
+                    this.$el.show();
+                }
+            },
+
             citeIt: function () {
                 var contentLayout = this.options.contentLayout;
                 if (contentLayout && contentLayout.buttonsForms) {

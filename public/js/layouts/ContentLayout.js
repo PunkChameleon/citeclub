@@ -31,10 +31,16 @@ define([
 
             onRender: function() {
 
-                var articleModel = new CC.Models.ArticleModel(),
+                var articleModel = new CC.Models.ArticleModel({
+                        isSearching: true
+                    }),
                     keywords = $('.keywords').val();
 
                 CC.MediaWiki.citationNeededPage(keywords, function(pageData) {
+
+                    // searching is finished
+                    articleModel.set("isSearching", false);
+                    
                     if (pageData != null) {
                         // data found!
             
@@ -71,17 +77,13 @@ define([
                                 articleModel.set({
                                     sectionNum: sectionNum,
                                     sectionText: sectionText,
-                                    html: paragraphHTML
+                                    html: paragraphHTML,
+                                    allDataRetrieved: true
                                 });
                                 
                             });
                         });
-            
-                    } else {
-                        // couldn't find any pages
-                        console.log("No articles to cite found");
-                    }
-            
+                    }             
                 });
 
                 //Show Quote Region

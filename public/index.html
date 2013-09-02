@@ -91,10 +91,36 @@
             </div>
         </script>
 
+        <script id="edit_message_modal_view_template" type="text/html">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Congrats!</h3>
+            </div>
+            <div class="modal-body">
+                <p>Article cited successfully!</p>
+                <p><a href="{{url}}" target="_blank">View Changes</a></p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary btn-ok" data-dismiss="modal">OK</a>
+            </div>
+        </script>
+
         <script id="quote_view_template" type="text/html">
             <article id="quote" class="row-fluid">
                 <h2>From the article on <a href="{{url}}" target="_blank">{{title}}</a>...</h2>
                 <p>{{{html}}}</p>
+            </article>
+        </script>
+
+        <script id="quote_view_searching_template" type="text/html">
+            <article id="quote" class="row-fluid">
+                <p>Searching for articles...</p>
+            </article>
+        </script>
+
+        <script id="quote_view_no_results_template" type="text/html">
+            <article id="quote" class="row-fluid">
+                <p>No articles found.</p>
             </article>
         </script>
 

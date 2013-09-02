@@ -8,20 +8,29 @@
 
 
 define([
-        "common",
-        "backbone",
-        "marionette"
-    ],
+    "common",
+    "backbone",
+    "marionette"
+],
 
-    function (Common, Backbone) {
+function (Common, Backbone) {
 
-        var CC = Common.CC || {};
+    var CC = Common.CC || {};
 
-        CC.Views.MessageModalView = Backbone.Marionette.ItemView.extend({
+    CC.Views.MessageModalView = Backbone.Marionette.ItemView.extend({
 
-            template: "#message_modal_view_template",
+        className: "message_modal modal hide fade",
 
-            className: "message_modal modal hide fade"
+        getTemplate: function() {
 
-        });
+            var type = this.model.get("type");
+
+            if (type === CC.config.messageTypes.EDIT) {
+                return "#edit_message_modal_view_template";
+            } else {
+                return "#message_modal_view_template";
+            }
+        }
+
     });
+});

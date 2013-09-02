@@ -27,6 +27,7 @@ define([
 
                 $.ajax({
                     type: "POST",
+                    dataType: 'json',
                     url: CC.config.PATH_TO_ACTION + "edit.php",
                     data: { 
                         pageId: this.get("id"), 

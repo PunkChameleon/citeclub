@@ -27,7 +27,7 @@ class MediaWiki {
 		return static::_makeHTTPRequest($url);
 	}
 		
-	public static function edit($pageId, $sectionNum, $text, $summary, $captchaId, $captchaWord) {
+	public static function edit($pageId, $sectionNum, $text, $summary, $captchaId="", $captchaWord="") {
 		
 		/*
 		* Edit a page
@@ -50,7 +50,7 @@ class MediaWiki {
 		$postParams = array(
 			'section' => $sectionNum,
 			'summary' => $summary,
-			'text'	  => utf8_encode($text),
+			'text'	  => $text,
 			'pageid'  => $pageId,
 			'token'   => $token
 		);

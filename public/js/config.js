@@ -1,10 +1,20 @@
 /*
  *
- * Author : streetlight
+ * Author: streetlight
  * Date: May 21, 2013
  * Description: Sets up require configuration for application.
  *
  */
+
+ // TODO:
+ // Better feedback about edited page
+ // Add <references> tag to page if there is none
+ // CAPTCHA support in JS
+ // Enter Keycoding
+ // Feedback (spinner) while AJAX call is being made
+ // Disabling of buttons after submit click
+ // Datetimepicker for date fields
+ // Validate citation input (ex. URL schemes)
 
 requirejs.config({
 
@@ -88,7 +98,11 @@ define(["common",
                 NEWS: "news",
                 BOOK: "book",
                 JOURNAL: "journal"
-            }, 
+            },
+            messageTypes: {
+                DEFAULT: 0,
+                EDIT: 1
+            } 
         };
 
         // Make AJAX call to get wikiURL before starting app

@@ -56,7 +56,8 @@ define([
             submit: function() {
                 
                 // create hashmap used to build citation wikitext (<ref>) from form data
-                var citationData = {},
+                var that = this,
+                    citationData = {},
                     fields = {};
 
                 citationData.type = this.options.type;
@@ -76,12 +77,22 @@ define([
                     newSectionWikitext = WikitextProcessor.citedSectionWikitext(oldSectionText, citationWikitext);
                 
                 if (newSectionWikitext) {
-                    this.model.submitCitation(newSectionWikitext, function() {
+                    this.model.submitCitation(newSectionWikitext, function(data) {
 
-                        CC.App.vent.trigger("showMsg", "Congrats!", "Article cited successfully!");
+                        CC.App.vent.trigger("showMsg", {
+                            type: CC.config.messageTypes.EDIT,
+                            url: that.model.get("url")
+                        });
+                        $(".new_page").click();
 
                     }, function(xhr) {
+                        CC.App.vent.trigger("showMsg", {
+                            type: CC.config.messageTypes.DEFAULT,
+                            title: "Error Citing Article",
+                            text: "An error occurred: " + xhr.responseText
+                        });
                         console.log("Error: " + xhr.responseText);
+                        console.log(xhr);
                     });
                 }
             }
