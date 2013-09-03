@@ -17,11 +17,28 @@ define([
         var CC = Common.CC || {};
 
         CC.Models.ArticleModel = Backbone.Model.extend({
-            defaults : {
-                "articleTitle" : "Richard Stallman",
-                "articleLink" : "#",
-                "articleContent" : '"One of his criteria for giving an interview to a journalist is that the journalist agree to use his terminology throughout the article.[65] <span>Sometimes he has even required journalists to read parts of the GNU philosophy before an interview, for efficiencys sake.<sup>[citation needed]</sup></span>He has been known to turn down speaking requests over some terminology issues.[66]"'
-            }
+
+        	submitCitation: function(newWikitext, successCallback, failureCallback) {
+
+        		/*
+                * Submit new citation for this article
+                * by making edit with new section wikitext
+                */
+
+                $.ajax({
+                    type: "POST",
+                    dataType: 'json',
+                    url: CC.config.PATH_TO_ACTION + "edit.php",
+                    data: { 
+                        pageId: this.get("id"), 
+                        sectionNum: this.get("sectionNum"),
+                        text: newWikitext
+                    },
+                    success: successCallback,
+                    error: failureCallback
+                });
+        	}
+
         });
 
 });

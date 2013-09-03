@@ -80,7 +80,10 @@ var WikitextProcessor = {
 		* Hashmap of citation attributes is translated into wikitext
 		* ex.) 
 				{'type': 'news', 'fields': { 'last': 'Caisse', 'first': 'Peter', 'title': 'Good Stuff'}} 
-												becomes 
+											       |
+											    becomes
+											       |
+											       V 
 				<ref>{{cite news|last=Caisse|first=Peter|title=Good Stuff}}</ref>
 		*/
 		
@@ -115,5 +118,14 @@ var WikitextProcessor = {
 		*/
 			
 		return sectionText.replace(WikitextProcessor.needsCitationPattern, citationText);
+	},
+
+	hasRefList: function(text) {
+
+		/*
+		* Returns true if text contains a reference list, otherwise false
+		*/
+
+		return /\{\{reflist/i.test(text); 
 	}
 }

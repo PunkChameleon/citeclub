@@ -49,14 +49,16 @@
         </script>
 
         <script id="login_view_template" type="text/html">
-             Please <a class="show_login">log in</a> or <a target="_blank" href="http://test.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page&type=signup">create an account</a> to start citing!
+            Please <a class="show_login">log in</a> or <a target="_blank" href="http://test.wikipedia.org/w/index.php?title=Special:UserLogin&returnto=Main+Page&type=signup">create an account</a> to start citing!
+        </script>
+
+        <script id="logout_view_template" type="text/html">
+            Hi, {{username}}! <a href="#" class="logout">log out</a> 
         </script>
 
         <script id="search_bar_view_template" type="text/html">
             <input type="text" class="keywords filter" placeholder="Search for Something to Cite Specifically...">
-            <button class="button newPage">Search</button>
-            <span>Or...</span>
-            <button class="button dice">Roll the Dice</button>
+            <button class="button new_page">Search</button>
         </script>
 
         <script id="login_modal_view_template" type="text/html">
@@ -70,14 +72,53 @@
                 </div>
                 <div class="modal-footer">
                 <a href="#" class="btn btn-cancel" data-dismiss="modal">Cancel</a>
-                <a href="#" class="btn btn-primary btn-login">Login In</a>
+                <a href="#" class="btn btn-primary btn-login">Log In</a>
+            </div>
+        </script>
+
+        <script id="message_modal_view_template" type="text/html">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>{{title}}</h3>
+            </div>
+            <div class="modal-body">
+                <p>{{text}}</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary btn-ok" data-dismiss="modal">OK</a>
+            </div>
+        </script>
+
+        <script id="edit_message_modal_view_template" type="text/html">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Congrats!</h3>
+            </div>
+            <div class="modal-body">
+                <p>Article cited successfully!</p>
+                <p><a href="{{url}}" target="_blank">View Changes</a></p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary btn-ok" data-dismiss="modal">OK</a>
             </div>
         </script>
 
         <script id="quote_view_template" type="text/html">
             <article id="quote" class="row-fluid">
-                <h2>From the article on <a href="{{articleLink}}" target="_blank">{{articleTitle}}</a>...</h2>
-                <p>{{{articleContent}}}</p>
+                <h2>From the article on <a href="{{url}}" target="_blank">{{title}}</a>...</h2>
+                <p>{{{html}}}</p>
+            </article>
+        </script>
+
+        <script id="quote_view_searching_template" type="text/html">
+            <article id="quote" class="row-fluid">
+                <p>Searching for articles...</p>
+            </article>
+        </script>
+
+        <script id="quote_view_no_results_template" type="text/html">
+            <article id="quote" class="row-fluid">
+                <p>No articles found.</p>
             </article>
         </script>
 
@@ -128,15 +169,11 @@
                 <label>Access Date</label>
                 <input id="accessdate" type="text">
                 <label></label>
-                <input type="submit" value="Submit" class="button">
+                <input type="submit" value="Submit" class="button cite_button">
                 <div>
                     <a class="back">Go Back</a>
                 </div>
             </div>
-        
-            <input type="hidden" id="section" name="section">
-            <input type="hidden" id="pageId" name="pageId">
-            <input type="hidden" id="text" name="text">
         </script>
 
         <script id="news_form_view_template" type="text/html">
@@ -158,15 +195,11 @@
                 <label>Date</label>
                 <input id="date" type="text">
                 <label></label>
-                <input type="submit" value="Submit" class="button">
+                <input type="submit" value="Submit" class="button cite_button">
                 <div>
                     <a class="back">Go Back</a>
                 </div>
             </div>
-
-            <input type="hidden" id="section" name="section">
-            <input type="hidden" id="pageId" name="pageId">
-            <input type="hidden" id="text" name="text">
         </script>
 
         <script id="book_form_view_template" type="text/html">
@@ -194,14 +227,11 @@
                 <label>URL</label>
                 <input id="url" type="text">
                 <label></label>
-                <input type="submit" value="Submit" class="button">
+                <input type="submit" value="Submit" class="button cite_button">
                 <div>
                     <a class="back">Go Back</a>
                 </div>
             </div>
-            <input type="hidden" id="section" name="section">
-            <input type="hidden" id="pageId" name="pageId">
-            <input type="hidden" id="text" name="text">
         </script>
 
         <script id="journal_form_view_template" type="text/html">
@@ -243,14 +273,11 @@
                 <label>Access Date</label>
                 <input id="accessdate" type="text">
                 <label></label>
-                <input type="submit" value="Submit" class="button">
+                <input type="submit" value="Submit" class="button cite_button">
                 <div>
                     <a class="back">Go Back</a>
                 </div>
             </div>
-            <input type="hidden" id="section" name="section">
-            <input type="hidden" id="pageId" name="pageId">
-            <input type="hidden" id="text" name="text">
         </script>
 
         <script id="footer_view_template" type="text/html">

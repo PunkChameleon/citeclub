@@ -18,12 +18,20 @@ define([
 
         CC.Views.QuoteView = Backbone.Marionette.ItemView.extend({
 
-            template: "#quote_view_template",
-
             className: "span10 offset1",
 
             initialize: function() {
                 this.listenTo(this.model, 'change', this.render);
+            },
+
+            onBeforeRender: function() {
+                if (this.model.get("isSearching")) {
+                    this.template = "#quote_view_searching_template";
+                } else if (this.model.has("id")) {
+                    this.template = "#quote_view_template";
+                } else {
+                    this.template = "#quote_view_no_results_template";
+                }
             }
 
         });

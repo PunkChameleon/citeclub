@@ -20,7 +20,24 @@ define([
 
             template: "#search_bar_view_template",
 
-            className: "search_bar"
+            className: "search_bar",
 
+            events: {
+                "click .new_page": "search",
+                "keypress": "keyPressed"
+            },
+
+            search: function() {
+                var contentLayout = this.options.contentLayout;
+                if (contentLayout) {
+                    contentLayout.render();
+                }
+            },
+
+            keyPressed: function(e) {
+                if (e.keyCode === 13) {
+                    this.search();
+                }
+            }
         });
 });

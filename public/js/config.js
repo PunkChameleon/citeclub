@@ -1,10 +1,16 @@
 /*
  *
- * Author : streetlight
+ * Author: streetlight
  * Date: May 21, 2013
  * Description: Sets up require configuration for application.
  *
  */
+
+ // TODO:
+ // Optionally add <references> tag to page if there is none
+ // Feedback (spinner) while AJAX call is being made
+ // Datetimepicker for date fields
+ // Validate citation input (ex. URL schemes)
 
 requirejs.config({
 
@@ -82,19 +88,44 @@ define(["common",
         });
 
         CC.config = {
-            PATH_TO_ACTION: "/citeclub/public/php/action/" 
+            PATH_TO_ACTION: "/citeclub/public/php/action/",
+            citationTypes: {
+                WEB: "web",
+                NEWS: "news",
+                BOOK: "book",
+                JOURNAL: "journal"
+            },
+            messageTypes: {
+                DEFAULT: 0,
+                EDIT: 1
+            } 
         };
 
         // Make AJAX call to get wikiURL before starting app
         $.ajax({
             url: CC.config.PATH_TO_ACTION + 'getWikiURL.php',
             success: function(wikiURL) {
-                // Configure JS wrapper
-                CC.MediaWiki = MediaWiki(CC.config.PATH_TO_ACTION, wikiURL);
-                // Start the app
-                $(document).ready(function () {
-                    CC.App.start();
-                });
+                // Make another AJAX call to get current user
+                // from session variable
+                $.ajax({
+                    url: CC.config.PATH_TO_ACTION + 'getUser.php',
+                    success: function(username) {
+                        // Set user
+                        CC.User = new CC.Models.UserModel({
+                            username: username
+                        });
+                        // Configure JS wrapper
+                        CC.MediaWiki = MediaWiki(CC.config.PATH_TO_ACTION, wikiURL);
+                        // Start the app
+                        $(document).ready(function () {
+                            CC.App.start();
+                        });
+                    },
+                    error: function(xhr, error){
+                        console.debug(xhr);
+                        console.debug(error);
+                    }
+                });                
             },
             error: function(xhr, error){
                 console.debug(xhr);

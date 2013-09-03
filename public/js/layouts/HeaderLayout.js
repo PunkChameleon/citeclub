@@ -29,15 +29,34 @@ define([
                 search: "#search_area"
             },
 
+            initialize: function() {
+                this.listenTo(CC.User, 'change', this.render);
+            },
+
             onRender: function () {
 
+                var view;
+                            
+                if (CC.User && CC.User.get("username")) {
+                    // user logged in
+                    view = new CC.Views.LogoutView({
+                        model: CC.User,
+                        contentLayout: this.options.contentLayout
+                    }); 
+                } else {
+                    // user not logged in
+                    view = new CC.Views.LoginView({
+                        modal: this.options.modal,
+                        contentLayout: this.options.contentLayout
+                    });
+                }         
                 //Show Login View
-                this.login.show(new CC.Views.LoginView({
-                    modal: this.options.modal
-                }));
+                this.login.show(view);
 
                 //Show Search View
-                this.search.show(new CC.Views.SearchBarView());
+                this.search.show(new CC.Views.SearchBarView({
+                    contentLayout: this.options.contentLayout
+                }));
             }
 
         });

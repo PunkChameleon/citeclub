@@ -7,13 +7,13 @@ try {
 	include('../MediaWiki.config.php');
 
 	// get message and page id passed from form
-	$text = $_POST['text'];
 	$pageId = $_POST['pageId'];
-	$sectionNum = $_POST['section'];
+	$sectionNum = $_POST['sectionNum'];
+	$text = $_POST['text'];
+	$summary = 'CiteClub Citation';
 	
-	$editXML = MediaWiki::edit($pageId, $text, $sectionNum);
+	echo MediaWiki::edit($pageId, $sectionNum, $text, $summary);
 
-	echo json_encode($editXML);
 	exit();
 	
 } catch (Exception $e) {

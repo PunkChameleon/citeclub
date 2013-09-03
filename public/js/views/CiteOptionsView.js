@@ -32,54 +32,34 @@ define([
                 "click .back": "goBack"
             },
 
-            type: {
-                "web": "web",
-                "news": "news",
-                "book": "book",
-                "journal": "journal"
-            },
-
             webCite: function () {
-                var contentLayout = this.options.contentLayout;
-
-                contentLayout.buttonsForms.show(new CC.Views.FormView({
-                    articleModel: this.options.articleModel,
-                    type: this.type.web,
-                    contentLayout: this.options.contentLayout
-                }));
+                this.showForm(CC.config.citationTypes.WEB);
             },
 
             newsCite: function () {
-                var contentLayout = this.options.contentLayout;
-
-                contentLayout.buttonsForms.show(new CC.Views.FormView({
-                    articleModel: this.options.articleModel,
-                    type: this.type.news,
-                    contentLayout: this.options.contentLayout,
-                    citeOptions: this
-                }));
+                this.showForm(CC.config.citationTypes.NEWS);
             },
 
             bookCite: function () {
-                var contentLayout = this.options.contentLayout;
-
-                contentLayout.buttonsForms.show(new CC.Views.FormView({
-                    articleModel: this.options.articleModel,
-                    type: this.type.book,
-                    contentLayout: this.options.contentLayout,
-                    citeOptions: this
-                }));
+                this.showForm(CC.config.citationTypes.BOOK);
             },
 
             journalCite: function () {
+                this.showForm(CC.config.citationTypes.JOURNAL);
+            },
+
+            showForm: function(type) {
+
                 var contentLayout = this.options.contentLayout;
 
-                contentLayout.buttonsForms.show(new CC.Views.FormView({
-                    articleModel: this.options.articleModel,
-                    type: this.type.journal,
-                    contentLayout: this.options.contentLayout,
-                    citeOptions: this
-                }));
+                if (contentLayout && contentLayout.buttonsForms) {
+                    contentLayout.buttonsForms.show(new CC.Views.FormView({
+                        model: this.model,
+                        type: type,
+                        contentLayout: this.options.contentLayout,
+                        citeOptions: this
+                    }));
+                }
             },
 
             goBack: function () {

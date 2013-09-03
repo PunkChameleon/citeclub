@@ -31,13 +31,26 @@ define([
                 //Place the main layout into the application
                 CC.App.applicationWrapper.show(appLayout);
 
+                var contentLayout = new CC.Layouts.ContentLayout();
+
                 //Place Header Layout
                 appLayout.header.show(new CC.Layouts.HeaderLayout({
-                    modal: appLayout.modal
+                    modal: appLayout.modal,
+                    contentLayout: contentLayout
                 }));
 
+                CC.App.vent.on("showMsg", function(data){
+                    var msgModel = Backbone.Model.extend(),
+                        msgModalView = new CC.Views.MessageModalView({
+                            model: new msgModel(data) 
+                        });
+
+                    appLayout.modal.show(msgModalView);
+                    msgModalView.$el.modal();
+                });
+
                 //Place Content Layout
-                appLayout.content.show(new CC.Layouts.ContentLayout());
+                appLayout.content.show(contentLayout);
 
                 //Place Footer View
                 appLayout.footer.show(new CC.Views.FooterView());

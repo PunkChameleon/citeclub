@@ -17,7 +17,7 @@ define([
 
         CC.Models.LoginModel = Backbone.Model.extend({
 
-            login: function (username, password, sucessCallback, failureCallback) {
+            login: function (username, password, successCallback, failureCallback) {
 
                 /*
                 * Log user in to MediaWiki
@@ -30,12 +30,8 @@ define([
                         username: username, 
                         password: password
                     },
-                    success: function (data) {
-                        console.log(data);
-                    },
-                    error: function (xhr) {
-                        console.log("Error logging in: " + xhr.responseText);
-                    }
+                    success: successCallback,
+                    error: failureCallback
                 });
             }
 

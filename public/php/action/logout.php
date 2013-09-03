@@ -7,13 +7,13 @@ try {
 	include('../MediaWiki.config.php');
 
 	// log out of Wikipedia
-	$logoutXML = MediaWiki::logout();
+	$logout = MediaWiki::logout();
 	
 	// destroy session
 	session_start();
 	session_destroy();
 	
-	echo json_encode($logoutXML);
+	echo $logout;
 	exit();
 	
 } catch (Exception $e) {

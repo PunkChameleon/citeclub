@@ -33,7 +33,8 @@ define([
             showLogin: function () {
 
                 var loginModal = new CC.Views.LoginModalView({
-                    model: new CC.Models.LoginModel()
+                    model: new CC.Models.LoginModel(),
+                    contentLayout: this.options.contentLayout
                 });
 
                 this.options.modal.show(loginModal);

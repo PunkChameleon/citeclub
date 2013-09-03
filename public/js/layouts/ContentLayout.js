@@ -31,16 +31,29 @@ define([
 
             onRender: function() {
 
-                var articleModel = new CC.Models.ArticleModel(),
+                var articleModel = new CC.Models.ArticleModel({
+                        isSearching: true
+                    }),
                     keywords = $('.keywords').val();
 
                 CC.MediaWiki.citationNeededPage(keywords, function(pageData) {
+
+                    // searching is finished
+                    articleModel.set("isSearching", false);
+                    
                     if (pageData != null) {
                         // data found!
             
                         // get page id and title
-                        var id = pageData.id;
-                        var title = pageData.title;
+                        var id = pageData.id,
+                            title = pageData.title,
+                            articleURL = CC.MediaWiki.urlFromPageId(id);
+
+                        articleModel.set({
+                            id: id,
+                            title: title,
+                            url: articleURL
+                        });
                         
                         CC.MediaWiki.getPageContent(id, function(content) {
                             CC.MediaWiki.getPageHTML(id, function(html) {
@@ -57,36 +70,20 @@ define([
                                     sectionText = content;
                                 }
                                 
-                                var articleURL = CC.MediaWiki.urlFromPageId(id);
-                                
                                 // set paragraph 
-                                var paragraphHTML = function() {
-                                    var citationNeededSelector = ":contains('citation needed')";
-                                    var $parent = $(html).find(citationNeededSelector).parent();            
-                                    if ($parent[0].nodeName == "TABLE") {
-                                        // we have a table
-                                        // get the HTML of the <td> instead of all the table HTML
-                                        return $(html).find('td').filter(citationNeededSelector).filter(':first').html();
-                                    }
-                                    return $parent.html();
-                                }
+                                var citationNeededParagraphs = $(html).find(":contains('citation needed')").parents('p, td'),
+                                    paragraphHTML = citationNeededParagraphs[0] ? citationNeededParagraphs[0].outerHTML : "";
 
                                 articleModel.set({
-                                    id: id,
-                                    title: title,
-                                    url: articleURL,
                                     sectionNum: sectionNum,
                                     sectionText: sectionText,
-                                    html: paragraphHTML
+                                    html: paragraphHTML,
+                                    allDataRetrieved: true
                                 });
                                 
                             });
                         });
-            
-                    } else {
-                        // couldn't find any pages
-                    }
-            
+                    }             
                 });
 
                 //Show Quote Region
@@ -97,7 +94,7 @@ define([
                 //Show Form Region
                 this.buttonsForms.show(new CC.Views.CiteItSkipItView({
                     model: articleModel,
-                    contentLayout : this
+                    contentLayout: this
                 }));
             }
 
