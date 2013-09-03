@@ -118,5 +118,14 @@ var WikitextProcessor = {
 		*/
 			
 		return sectionText.replace(WikitextProcessor.needsCitationPattern, citationText);
+	},
+
+	hasRefList: function(text) {
+
+		/*
+		* Returns true if text contains a reference list, otherwise false
+		*/
+
+		return /\{\{reflist/i.test(text); 
 	}
 }

@@ -77,6 +77,10 @@ define([
                     newSectionWikitext = WikitextProcessor.citedSectionWikitext(oldSectionText, citationWikitext);
                 
                 if (newSectionWikitext) {
+                    // disable submit button
+                    this.$el.find('input[type=submit]')
+                        .prop('disabled', true)
+                        .addClass('disabled');
                     this.model.submitCitation(newSectionWikitext, function(data) {
 
                         CC.App.vent.trigger("showMsg", {

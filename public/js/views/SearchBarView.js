@@ -23,7 +23,8 @@ define([
             className: "search_bar",
 
             events: {
-                "click .new_page": "search"
+                "click .new_page": "search",
+                "keypress": "keyPressed"
             },
 
             search: function() {
@@ -31,7 +32,12 @@ define([
                 if (contentLayout) {
                     contentLayout.render();
                 }
-            }
+            },
 
+            keyPressed: function(e) {
+                if (e.keyCode === 13) {
+                    this.search();
+                }
+            }
         });
 });

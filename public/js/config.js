@@ -7,12 +7,8 @@
  */
 
  // TODO:
- // Better feedback about edited page
- // Add <references> tag to page if there is none
- // CAPTCHA support in JS
- // Enter Keycoding
+ // Optionally add <references> tag to page if there is none
  // Feedback (spinner) while AJAX call is being made
- // Disabling of buttons after submit click
  // Datetimepicker for date fields
  // Validate citation input (ex. URL schemes)
 
