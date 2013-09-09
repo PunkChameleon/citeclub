@@ -41,7 +41,7 @@ define([
                     // searching is finished
                     articleModel.set("isSearching", false);
                     
-                    if (pageData != null) {
+                    if (pageData !== null) {
                         // data found!
             
                         // get page id and title
@@ -64,8 +64,8 @@ define([
                                     sectionNum;
                                 
                                 if (firstSection !== null) {
-                                    sectionNum = firstSection['section'];
-                                    sectionText = firstSection['text'];
+                                    sectionNum = firstSection.section;
+                                    sectionText = firstSection.text;
                                 } else {
                                     sectionText = content;
                                 }

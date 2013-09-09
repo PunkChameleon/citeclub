@@ -113,7 +113,7 @@ var WikitextProcessor = {
 	citedSectionWikitext: function(sectionText, citationText) {
 		
 		/*
-		* Replaces citation need wikitext ({{Citation needed}}) in section text
+		* Replaces citation needed wikitext ({{Citation needed}}) in section text
 		* with citation wikitext (<ref>{{cite web|title=Title}}</ref>)
 		*/
 			

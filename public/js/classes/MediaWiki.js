@@ -152,7 +152,7 @@
 					data: params,
 					success: function(data) {
 						var html;
-						if (data.parse) {
+						if (data && data.parse && data.parse.text) {
 							html = data.parse.text['*'];
 						}
 						foundHTML(html);

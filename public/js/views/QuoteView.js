@@ -32,6 +32,12 @@ define([
                 } else {
                     this.template = "#quote_view_no_results_template";
                 }
+            },
+
+            onRender: function() {
+                if (this.model.get("allDataRetrieved")) {
+                    this.$el.find(".loading_article_spinner").addClass("hidden");
+                }
             }
 
         });
