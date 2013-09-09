@@ -8,7 +8,6 @@
 
  // TODO:
  // Optionally add {{reflist}} to page wikitext if there is none
- // Feedback (spinner) while AJAX call is being made
  // Datetimepicker for date fields
  // Validate citation input (ex. URL schemes)
 
@@ -88,7 +87,7 @@ define(["common",
         });
 
         CC.config = {
-            PATH_TO_ACTION: "/citeclub/public/php/action/",
+            PATH_TO_ACTION: "php/action/",
             citationTypes: {
                 WEB: "web",
                 NEWS: "news",

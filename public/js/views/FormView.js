@@ -10,11 +10,12 @@
 define([
     "common",
     "backbone",
+    "mustache",
     "marionette",
     "views/CiteOptionsView",
     "wikitext"
     ],
-    function(Common, Backbone) {
+    function(Common, Backbone, Mustache) {
 
         var CC = Common.CC || {};
 
@@ -40,6 +41,12 @@ define([
             events: {
                 "click .back": "goBack",
                 "click .cite_button": "submit"
+            },
+
+            onRender: function() {
+                if (this.model.get("hasRefList") === false) {
+                    this.$el.find(".no_reflist").removeClass("hidden");
+                }
             },
 
             goBack: function() {

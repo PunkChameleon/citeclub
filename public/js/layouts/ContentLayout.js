@@ -41,7 +41,7 @@ define([
                     // searching is finished
                     articleModel.set("isSearching", false);
                     
-                    if (pageData !== null) {
+                    if (pageData) {
                         // data found!
             
                         // get page id and title
@@ -55,11 +55,12 @@ define([
                             url: articleURL
                         });
                         
-                        CC.MediaWiki.getPageContent(id, function(content) {
+                        CC.MediaWiki.getPageContent(id, function(text) {
                             CC.MediaWiki.getPageHTML(id, function(html) {
             
                                 // text for this section in Wikipedia markup language
-                                var firstSection = WikitextProcessor.firstCitationNeededSectionText(content),
+                                var firstSection = WikitextProcessor.firstCitationNeededSectionText(text),
+                                    hasRefList = WikitextProcessor.hasRefList(text),
                                     sectionText, 
                                     sectionNum;
                                 
@@ -67,17 +68,21 @@ define([
                                     sectionNum = firstSection.section;
                                     sectionText = firstSection.text;
                                 } else {
-                                    sectionText = content;
+                                    sectionText = text;
                                 }
                                 
                                 // set paragraph 
-                                var citationNeededParagraphs = $(html).find(":contains('citation needed')").parents('p, td'),
+                                var citationNeededElems = $(html).find(":contains('citation needed')").filter(":first"),
+                                    citationNeededParagraphs = citationNeededElems[0] ? citationNeededElems.parents() : [],
                                     paragraphHTML = citationNeededParagraphs[0] ? citationNeededParagraphs[0].outerHTML : "";
+
+                                var htmlToDisplay = WikitextProcessor.quoteText(sectionText);
 
                                 articleModel.set({
                                     sectionNum: sectionNum,
                                     sectionText: sectionText,
-                                    html: paragraphHTML,
+                                    html: htmlToDisplay,
+                                    hasRefList: hasRefList,
                                     allDataRetrieved: true
                                 });
                                 

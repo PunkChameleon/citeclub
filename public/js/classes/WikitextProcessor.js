@@ -4,7 +4,8 @@ var WikitextProcessor = {
 	* Processes Wikitext (or Wiki markup)
 	*/
 
-	needsCitationPattern: /\{{2}(Citation needed|Fact|Cn)((?!}})[^])*\}{2}/, // See http://en.wikipedia.org/wiki/Template:Citation_needed
+	needsCitationPattern: /\{{2}(Citation needed|Fact|Cn)((?!}})[^])*\}{2}/i, // See http://en.wikipedia.org/wiki/Template:Citation_needed
+	lineBreakPattern: /(\r\n|\n|\r)/,
 
 	citationNeededParagraph: function(text) {
 		
@@ -12,8 +13,7 @@ var WikitextProcessor = {
 		* Returns paragraph that citation needed flag is in
 		*/
 		
-		var lineBreakPattern = /(\r\n|\n|\r)/;
-		var citationNeededParagraphsPattern = new RegExp(lineBreakPattern.source + ".+" + WikitextProcessor.needsCitationPattern.source + ".*" + lineBreakPattern.source);
+		var citationNeededParagraphsPattern = new RegExp(WikitextProcessor.lineBreakPattern.source + ".+" + WikitextProcessor.needsCitationPattern.source + ".*" + WikitextProcessor.lineBreakPattern.source);
 		var paragraph = text.match(citationNeededParagraphsPattern);
 		if (paragraph !== null) {
 			return paragraph[0];
@@ -127,5 +127,34 @@ var WikitextProcessor = {
 		*/
 
 		return /\{\{reflist/i.test(text); 
+	},
+
+	quoteText: function(text) {
+
+		var matches = text.match(WikitextProcessor.needsCitationPattern);
+		if (matches) {
+			var matchText = matches[1];
+			if (matchText) {
+				var matchTextIndex = text.indexOf(matchText),
+					sectionA = text.substring(0, matchTextIndex),
+					sectionB = text.substring(matchTextIndex + matchText.length, text.length),
+					lineBreakPatternLast = new RegExp("[^]*(?=" + WikitextProcessor.lineBreakPattern.source + ")"),
+					sectionAMatches = sectionA.match(lineBreakPatternLast),
+					sectionBMatches = sectionB.match(WikitextProcessor.lineBreakPattern),
+					sectionAStartIndex = sectionAMatches ? sectionAMatches[0].length : 0,
+					sectionAEndIndex = sectionA.length,
+					sectionBStartIndex = 0,
+					sectionBEndIndex = sectionBMatches ? sectionBMatches.index : sectionB.length;
+					resultWikitext = sectionA.substring(sectionAStartIndex, sectionAEndIndex) + matchText + sectionB.substring(sectionBStartIndex, sectionBEndIndex),
+					resultText = resultWikitext
+									.replace(/\{{2}(((?!\{{2}).)+)\}{2}/g, '')			 // removes {{a}}
+									.replace(/\'{2,5}(((?!\'{2,5}).)+)\'{2,5}/g, '$1') 	 // replaces ''a'' with a
+									.replace(/\[{2}[^\|]+\|(((?!\[{2}).)+)\]{2}/g, '$1') // replaces [[a|b]] with b
+									.replace(/\[{2}(((?!\[{2}).)+)\]{2}/g, '$1') 		 // replaces [[a]] with a
+									.replace(/((\r\n|\n|\r|^)\| ?)/, ''); 			     // remove initial pipes and line break
+
+				return resultText;
+			}
+		}
 	}
 }
