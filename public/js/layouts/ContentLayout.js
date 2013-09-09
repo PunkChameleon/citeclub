@@ -71,7 +71,8 @@ define([
                                 }
                                 
                                 // set paragraph 
-                                var citationNeededParagraphs = $(html).find(":contains('citation needed')").parents('p, td'),
+                                var citationNeededElems = $(html).find(":contains('citation needed')").filter(":first"),
+                                    citationNeededParagraphs = citationNeededElems[0] ? citationNeededElems.parents() : [],
                                     paragraphHTML = citationNeededParagraphs[0] ? citationNeededParagraphs[0].outerHTML : "";
 
                                 articleModel.set({

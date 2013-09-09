@@ -8,7 +8,6 @@
 
  // TODO:
  // Optionally add {{reflist}} to page wikitext if there is none
- // Feedback (spinner) while AJAX call is being made
  // Datetimepicker for date fields
  // Validate citation input (ex. URL schemes)
 
