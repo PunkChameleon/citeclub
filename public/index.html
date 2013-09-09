@@ -105,14 +105,14 @@
 
         <script id="quote_view_template" type="text/html">
             <article id="quote" class="row-fluid">
-                <h2>From the article on <a href="{{url}}" target="_blank">{{title}}</a>...</h2>
+                <h2>From the article on <a href="{{url}}" target="_blank">{{title}}</a>... <img src="img/ajax-loader.gif" class="loading_article_spinner"></h2>
                 <p>{{{html}}}</p>
             </article>
         </script>
 
         <script id="quote_view_searching_template" type="text/html">
             <article id="quote" class="row-fluid">
-                <p>Searching for articles...</p>
+                <p>Searching for articles... <img src="img/ajax-loader.gif" class="searching_spinner"></p>
             </article>
         </script>
 
@@ -158,7 +158,7 @@
                 <input id="first" type="text">
                 <label>Title</label>
                 <input id="title" type="text">
-                <label>Url</label>
+                <label>URL</label>
                 <input id="url" type="text">
             </div>
             <div class="form_holder span6">
@@ -170,6 +170,7 @@
                 <input id="accessdate" type="text">
                 <label></label>
                 <input type="submit" value="Submit" class="button cite_button">
+                <img src="img/ajax-loader.gif" class="submitting_spinner hidden">
                 <div>
                     <a class="back">Go Back</a>
                 </div>
@@ -184,7 +185,7 @@
                 <input id="first" type="text">
                 <label>Title</label>
                 <input id="title" type="text">
-                <label>Url</label>
+                <label>URL</label>
                 <input id="url" type="text">
             </div>
             <div class="form_holder span6">
@@ -196,6 +197,7 @@
                 <input id="date" type="text">
                 <label></label>
                 <input type="submit" value="Submit" class="button cite_button">
+                <img src="img/ajax-loader.gif" class="submitting_spinner hidden">
                 <div>
                     <a class="back">Go Back</a>
                 </div>
@@ -228,6 +230,7 @@
                 <input id="url" type="text">
                 <label></label>
                 <input type="submit" value="Submit" class="button cite_button">
+                <img src="img/ajax-loader.gif" class="submitting_spinner hidden">
                 <div>
                     <a class="back">Go Back</a>
                 </div>
@@ -274,6 +277,7 @@
                 <input id="accessdate" type="text">
                 <label></label>
                 <input type="submit" value="Submit" class="button cite_button">
+                <img src="img/ajax-loader.gif" class="submitting_spinner hidden">
                 <div>
                     <a class="back">Go Back</a>
                 </div>

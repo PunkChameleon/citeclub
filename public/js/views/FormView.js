@@ -81,15 +81,18 @@ define([
                     this.$el.find('input[type=submit]')
                         .prop('disabled', true)
                         .addClass('disabled');
+                    // show spinner
+                    this.$el.find('.submitting_spinner').removeClass('hidden');
                     this.model.submitCitation(newSectionWikitext, function(data) {
-
+                        // show success message
                         CC.App.vent.trigger("showMsg", {
                             type: CC.config.messageTypes.EDIT,
                             url: that.model.get("url")
                         });
+                        // find new page
                         $(".new_page").click();
-
                     }, function(xhr) {
+                        // show error message
                         CC.App.vent.trigger("showMsg", {
                             type: CC.config.messageTypes.DEFAULT,
                             title: "Error Citing Article",
