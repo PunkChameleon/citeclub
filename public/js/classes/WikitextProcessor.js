@@ -6,6 +6,7 @@ var WikitextProcessor = {
 
 	needsCitationPattern: /\{{2}(Citation needed|Fact|Cn)((?!}})[^])*\}{2}/i, // See http://en.wikipedia.org/wiki/Template:Citation_needed
 	lineBreakPattern: /(\r\n|\n|\r)/,
+	citationNeededText: 'citation needed',
 
 	citationNeededParagraph: function(text) {
 		
@@ -129,6 +130,10 @@ var WikitextProcessor = {
 		return /\{\{reflist/i.test(text); 
 	},
 
+	wrapInBrackets: function(text) {
+		return '[' + text + ']';
+	},
+
 	quoteText: function(text) {
 
 		var matches = text.match(WikitextProcessor.needsCitationPattern);
@@ -147,11 +152,13 @@ var WikitextProcessor = {
 					sectionBEndIndex = sectionBMatches ? sectionBMatches.index : sectionB.length;
 					resultWikitext = sectionA.substring(sectionAStartIndex, sectionAEndIndex) + matchText + sectionB.substring(sectionBStartIndex, sectionBEndIndex),
 					resultText = resultWikitext
+									.replace(WikitextProcessor.needsCitationPattern, ' <a>' + WikitextProcessor.wrapInBrackets(WikitextProcessor.citationNeededText) + '</a>')
 									.replace(/\{{2}(((?!\{{2}).)+)\}{2}/g, '')			 // removes {{a}}
 									.replace(/\'{2,5}(((?!\'{2,5}).)+)\'{2,5}/g, '$1') 	 // replaces ''a'' with a
 									.replace(/\[{2}[^\|]+\|(((?!\[{2}).)+)\]{2}/g, '$1') // replaces [[a|b]] with b
 									.replace(/\[{2}(((?!\[{2}).)+)\]{2}/g, '$1') 		 // replaces [[a]] with a
-									.replace(/((\r\n|\n|\r|^)\| ?)/, ''); 			     // remove initial pipes and line break
+									.replace(/((\r\n|\n|\r|^)\| ?)/, '') 			     // remove initial pipes and line break
+									.replace(/((\r\n|\n|\r|^)\* ?)/, ''); 			     // remove initial asterisk and line break
 
 				return resultText;
 			}
